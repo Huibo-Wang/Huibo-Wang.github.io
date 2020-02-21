@@ -20,27 +20,31 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="1 配置公式教程如下（很详细）：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;68e6f82d88b7  最后一步，在调用mathjax时，如果我直接在文章开头添加：mathjax: true时，无法正确生成公式 修改方法：  123---mathjax: true---  —- 圈住的部分，称为文章的front-matter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="next配置">
+<meta property="og:url" content="http://yoursite.com/2020/02/21/next%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1 配置公式教程如下（很详细）：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;68e6f82d88b7  最后一步，在调用mathjax时，如果我直接在文章开头添加：mathjax: true时，无法正确生成公式 修改方法：  123---mathjax: true---  —- 圈住的部分，称为文章的front-matter">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-21T09:10:08.632Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2020/02/21/next%E9%85%8D%E7%BD%AE/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false
+    isHome: false,
+    isPost: true
   };
 </script>
 
-  <title>Hexo</title>
+  <title>next配置 | Hexo</title>
   
 
 
@@ -147,91 +151,10 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/hexo+github%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/21/hexo+github%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">hexo+github创建基本教程</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-02-21 00:00:00 / Modified: 17:14:19" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/blog/" itemprop="url" rel="index">
-                    <span itemprop="name">blog</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-          <h1 id="1-搭建个人博客"><a href="#1-搭建个人博客" class="headerlink" title="1 搭建个人博客"></a>1 搭建个人博客</h1><p>此处参考下列<strong>卡夫卡想忘了你</strong>的知乎文章搭建，文章链接如下</p>
-<blockquote>
-<p><a href="https://zhuanlan.zhihu.com/p/59517224" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/59517224</a></p>
-</blockquote>
-<h1 id="2-hexo常见指令"><a href="#2-hexo常见指令" class="headerlink" title="2 hexo常见指令"></a>2 hexo常见指令</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/21/hexo+github%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
   
   
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/next%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -245,8 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/21/next%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">next配置</a>
+          next配置
         </h1>
 
         <div class="post-meta">
@@ -282,194 +204,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1-配置公式"><a href="#1-配置公式" class="headerlink" title="1 配置公式"></a>1 配置公式</h1><p>教程如下（很详细）：<a href="https://www.jianshu.com/p/68e6f82d88b7" target="_blank" rel="noopener">https://www.jianshu.com/p/68e6f82d88b7</a></p>
+        <h1 id="1-配置公式"><a href="#1-配置公式" class="headerlink" title="1 配置公式"></a>1 配置公式</h1><p>教程如下（很详细）：<a href="https://www.jianshu.com/p/68e6f82d88b7" target="_blank" rel="noopener">https://www.jianshu.com/p/68e6f82d88b7</a></p>
 <blockquote>
 <p>最后一步，在调用mathjax时，如果我直接在文章开头添加：mathjax: true时，无法正确生成公式</p>
 <p>修改方法：</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>—- 圈住的部分，称为文章的<strong>front-matter</strong><br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/21/next%E9%85%8D%E7%BD%AE/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+<p>—- 圈住的部分，称为文章的<strong>front-matter</strong><br><a id="more"></a></p>
+<h1 id="2-首页显示文章摘要"><a href="#2-首页显示文章摘要" class="headerlink" title="2 首页显示文章摘要"></a>2 首页显示文章摘要</h1></blockquote>
+<p><strong>转载自</strong>：<a href="https://ryderchan.github.io/2017/01/26/hexo小技巧-首页显示文章摘要及图片/" target="_blank" rel="noopener">https://ryderchan.github.io/2017/01/26/hexo%E5%B0%8F%E6%8A%80%E5%B7%A7-%E9%A6%96%E9%A1%B5%E6%98%BE%E7%A4%BA%E6%96%87%E7%AB%A0%E6%91%98%E8%A6%81%E5%8F%8A%E5%9B%BE%E7%89%87/</a></p>
+<h2 id="next主题官方给的三种生成摘要方式"><a href="#next主题官方给的三种生成摘要方式" class="headerlink" title="next主题官方给的三种生成摘要方式"></a>next主题官方给的三种生成摘要方式</h2><ol>
+<li>在文章中使用<!--more-->手动进行截断，Hexo 提供的方式<strong>(推荐)</strong></li>
+<li>在文章的 <a href="https://hexo.io/docs/front-matter.html" target="_blank" rel="noopener">front-matter</a> 中添加 description，并提供文章摘录</li>
+<li>自动形成摘要，在主题配置文件中添加，默认截取的长度为 150字符，可以根据需要自行设定：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auto_excerpt:</span><br><span class="line">  enable: true</span><br><span class="line">  length: 150</span><br></pre></td></tr></table></figure>
+<h2 id="文章模板"><a href="#文章模板" class="headerlink" title="文章模板"></a>文章模板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: git的基本使用</span><br><span class="line">date: 2017-01-24</span><br><span class="line">categories:</span><br><span class="line">- 学习</span><br><span class="line">- git</span><br><span class="line">tags:</span><br><span class="line">  - git</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">摘要内容......</span><br><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="3-添加文章分类"><a href="#3-添加文章分类" class="headerlink" title="3 添加文章分类"></a>3 添加文章分类</h1><p><strong>转载自</strong>：<a href="https://whx4j8.github.io/2016/03/16/hexo-next-添加为文章添加分类/" target="_blank" rel="noopener">https://whx4j8.github.io/2016/03/16/hexo-next-%E6%B7%BB%E5%8A%A0%E4%B8%BA%E6%96%87%E7%AB%A0%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB/</a></p>
+<ol>
+<li><p>新建一个页面，命名为 categories 。命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>此时在source文件夹下会产生categories文件夹，打开其中的index.md文件夹</p>
+</blockquote>
+<ol>
+<li><p>编辑刚新建的页面，将页面的类型设置为 categories ，主题将自动为这个页面显示所有分类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">date: 2014-12-22 12:39:04</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">date: 2014-12-22 12:39:04</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在菜单中添加链接。编辑主题的 _config.yml ，将 menu 中的 categories: /categories 注释去掉，如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: &#x2F;</span><br><span class="line">  categories: &#x2F;categories</span><br><span class="line">  archives: &#x2F;archives</span><br><span class="line">  tags: &#x2F;tags</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>此时页面不显示分类，需继续设置如下：</p>
+</li>
+</ol>
+<h4 id="添加文章分类关联"><a href="#添加文章分类关联" class="headerlink" title="添加文章分类关联"></a>添加文章分类关联</h4><ol>
+<li><p>在文章中添加categories属性，再部署之后就可以在分类页看到分类了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: hexo next 为文章添加分类</span><br><span class="line">date: 2016-03-16 08:12:43</span><br><span class="line">tags:</span><br><span class="line">categories: 前端	&#x2F;&#x2F;此处</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+</ol>
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/laplacianFoam/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/21/laplacianFoam/" class="post-title-link" itemprop="url">laplacianFoam</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-02-21 00:00:00 / Modified: 16:53:16" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenFOAM%E6%B1%82%E8%A7%A3%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">OpenFOAM求解器学习</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-背景介绍"><a href="#1-背景介绍" class="headerlink" title="1. 背景介绍"></a>1. 背景介绍</h1><p>导热问题，常发生在固体加热，此时由于介质均一，热量的传递仅由热扩散作用决定，因而可忽略对流的影响。<br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/21/laplacianFoam/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/21/laplacianFoam/" rel="prev" title="laplacianFoam">
+      <i class="fa fa-chevron-left"></i> laplacianFoam
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/21/hexo+github%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/" rel="next" title="hexo+github创建基本教程">
+      hexo+github创建基本教程 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/%E5%AF%B9%E8%B1%A1%E6%B3%A8%E5%86%8C%E6%9C%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/21/%E5%AF%B9%E8%B1%A1%E6%B3%A8%E5%86%8C%E6%9C%BA/" class="post-title-link" itemprop="url">对象注册机</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-02-21 00:00:00 / Modified: 16:51:33" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenFOAM%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index">
-                    <span itemprop="name">OpenFOAM基础知识</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文主要介绍了对象注册机的各参数类型及使用范例<br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/21/%E5%AF%B9%E8%B1%A1%E6%B3%A8%E5%86%8C%E6%9C%BA/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -520,6 +327,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-配置公式"><span class="nav-number">1.</span> <span class="nav-text">1 配置公式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-首页显示文章摘要"><span class="nav-number">2.</span> <span class="nav-text">2 首页显示文章摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#next主题官方给的三种生成摘要方式"><span class="nav-number">2.1.</span> <span class="nav-text">next主题官方给的三种生成摘要方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章模板"><span class="nav-number">2.2.</span> <span class="nav-text">文章模板</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-添加文章分类"><span class="nav-number">3.</span> <span class="nav-text">3 添加文章分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加文章分类关联"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">添加文章分类关联</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
