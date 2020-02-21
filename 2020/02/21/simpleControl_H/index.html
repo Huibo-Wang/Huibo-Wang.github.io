@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="代码意义解释总述主要的函数为loop()函数，检查当前时间步是否满足收敛条件，如满足，返回迭代终止，否则存储当前时间步中场的数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="simpleControl.H">
+<meta property="og:url" content="http://yoursite.com/2020/02/21/simpleControl_H/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="代码意义解释总述主要的函数为loop()函数，检查当前时间步是否满足收敛条件，如满足，返回迭代终止，否则存储当前时间步中场的数据">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-21T09:50:41.258Z">
+<meta property="article:modified_time" content="2020-02-21T09:50:41.259Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/21/simpleControl_H/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>simpleControl.H | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/simpleControl_H/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          simpleControl.H
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-21 17:50:41" itemprop="dateCreated datePublished" datetime="2020-02-21T17:50:41+08:00">2020-02-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenFOAM-%E5%9F%BA%E7%A1%80%E5%A4%B4%E6%96%87%E4%BB%B6%E7%AF%87/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenFOAM-基础头文件篇</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="代码意义解释"><a href="#代码意义解释" class="headerlink" title="代码意义解释"></a>代码意义解释</h1><h2 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h2><p>主要的函数为loop()函数，检查当前时间步是否满足收敛条件，如满足，返回迭代终止，否则存储当前时间步中场的数据</p>
+<a id="more"></a>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> Foam::simpleControl::loop()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">read</span>();		<span class="comment">//读取controlDict中的数据，如nNonOrthCorr_，momentumPredictor_，transonic_等</span></span><br><span class="line"></span><br><span class="line">    Time&amp; time = <span class="keyword">const_cast</span>&lt;Time&amp;&gt;(mesh_.time());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (initialised_)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (criteriaSatisfied())	<span class="comment">//满足收敛条件，局部残差，总体残差</span></span><br><span class="line">        &#123;</span><br><span class="line">            Info&lt;&lt; nl &lt;&lt; algorithmName_ &lt;&lt; <span class="string">" solution converged in "</span></span><br><span class="line">                &lt;&lt; time.timeName() &lt;&lt; <span class="string">" iterations"</span> &lt;&lt; nl &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Set to finalise calculation</span></span><br><span class="line">            time.writeAndEnd();	<span class="comment">//Write the objects now (not at end of iteration) and end 									the run</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            storePrevIterFields();	<span class="comment">//把当前迭代步的场存储</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        initialised_ = <span class="literal">true</span>;</span><br><span class="line">        storePrevIterFields();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> time.loop();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>表达式</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>protected</strong></td>
+<td></td>
+<td>初始化标志</td>
+</tr>
+<tr>
+<td>bool initialised_;</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>read</td>
+<td>void read()</td>
+<td>读取controls</td>
+</tr>
+<tr>
+<td>criteriaSatisfied</td>
+<td>bool criteriaSatisfied();</td>
+<td>如果所有的收敛检查都满足，返回true</td>
+</tr>
+<tr>
+<td>simpleControl</td>
+<td>simpleControl(const simpleControl&amp;);</td>
+<td></td>
+</tr>
+<tr>
+<td>=</td>
+<td>void operator=(const simpleControl&amp;);</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>public</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>simpleControl</td>
+<td>simpleControl(fvMesh&amp; mesh);</td>
+<td></td>
+</tr>
+<tr>
+<td>~simpleControl</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>loop</td>
+<td>virtual bool loop();</td>
+<td>求解控制</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="源代码-补充代码"><a href="#源代码-补充代码" class="headerlink" title="源代码+补充代码"></a>源代码+补充代码</h1><h2 id="public-solutionControl-H"><a href="#public-solutionControl-H" class="headerlink" title="public solutionControl.H"></a>public solutionControl.H</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*---------------------------------------------------------------------------*\</span></span><br><span class="line"><span class="comment">  =========                 |</span></span><br><span class="line"><span class="comment">  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox</span></span><br><span class="line"><span class="comment">   \\    /   O peration     |</span></span><br><span class="line"><span class="comment">    \\  /    A nd           | Copyright (C) 2011-2012 OpenFOAM Foundation</span></span><br><span class="line"><span class="comment">     \\/     M anipulation  |</span></span><br><span class="line"><span class="comment">-------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">License</span></span><br><span class="line"><span class="comment">    This file is part of OpenFOAM.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    OpenFOAM is free software: you can redistribute it and/or modify it</span></span><br><span class="line"><span class="comment">    under the terms of the GNU General Public License as published by</span></span><br><span class="line"><span class="comment">    the Free Software Foundation, either version 3 of the License, or</span></span><br><span class="line"><span class="comment">    (at your option) any later version.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    OpenFOAM is distributed in the hope that it will be useful, but WITHOUT</span></span><br><span class="line"><span class="comment">    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span></span><br><span class="line"><span class="comment">    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span></span><br><span class="line"><span class="comment">    for more details.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    You should have received a copy of the GNU General Public License</span></span><br><span class="line"><span class="comment">    along with OpenFOAM.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Class</span></span><br><span class="line"><span class="comment">    Foam::solutionControl</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Description</span></span><br><span class="line"><span class="comment">    Base class for solution control classes</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">\*---------------------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> solutionControl_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> solutionControl_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"fvMesh.H"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Foam</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*---------------------------------------------------------------------------*\</span></span><br><span class="line"><span class="comment">                       Class solutionControl Declaration</span></span><br><span class="line"><span class="comment">\*---------------------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">solutionControl</span></span></span><br><span class="line"><span class="class">:</span></span><br><span class="line">    <span class="keyword">public</span> IOobject</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">fieldData</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">        wordRe name;</span><br><span class="line">        scalar absTol;</span><br><span class="line">        scalar relTol;</span><br><span class="line">        scalar initialResidual;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Protected data</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Reference to the mesh database</span></span><br><span class="line">        fvMesh&amp; mesh_;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- List of residual data per field</span></span><br><span class="line">        List&lt;fieldData&gt; residualControl_;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- The dictionary name, e.g. SIMPLE, PIMPLE</span></span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">word</span> algorithmName_;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Solution controls</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Maximum number of non-orthogonal correctors</span></span><br><span class="line">            label nNonOrthCorr_;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Flag to indicate to solve for momentum</span></span><br><span class="line">            <span class="keyword">bool</span> momentumPredictor_;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Flag to indicate to solve using transonic algorithm</span></span><br><span class="line">            <span class="keyword">bool</span> transonic_;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Evolution</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Current corrector loop index</span></span><br><span class="line">            label corr_;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Current non-orthogonal corrector loop index</span></span><br><span class="line">            label corrNonOrtho_;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Protected Member Functions</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Read controls from fvSolution dictionary</span></span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(<span class="keyword">const</span> <span class="keyword">bool</span> absTolOnly)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Return index of field in residualControl_ if present</span></span><br><span class="line">        <span class="keyword">virtual</span> label applyToField</span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">const</span> <span class="keyword">word</span>&amp; fieldName,</span><br><span class="line">            <span class="keyword">const</span> <span class="keyword">bool</span> useRegEx = <span class="literal">true</span></span><br><span class="line">        ) <span class="keyword">const</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Return true if all convergence checks are satisfied</span></span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">criteriaSatisfied</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Store previous iteration fields</span></span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">storePrevIterFields</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Store previous iteration field for vol&lt;Type&gt;Fields</span></span><br><span class="line">        <span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">Type</span>&gt;</span></span><br><span class="line"><span class="class">        <span class="title">void</span> <span class="title">storePrevIter</span>() <span class="title">const</span>;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Disallow default bitwise copy construct</span></span><br><span class="line">        solutionControl(<span class="keyword">const</span> solutionControl&amp;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Disallow default bitwise assignment</span></span><br><span class="line">        <span class="keyword">void</span> <span class="keyword">operator</span>=(<span class="keyword">const</span> solutionControl&amp;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Static Data Members</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Run-time type information</span></span><br><span class="line">        TypeName(<span class="string">"solutionControl"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Constructors</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Construct from mesh</span></span><br><span class="line">        solutionControl(fvMesh&amp; mesh, <span class="keyword">const</span> <span class="keyword">word</span>&amp; algorithmName);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//- Destructor</span></span><br><span class="line">    <span class="keyword">virtual</span> ~solutionControl();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Member Functions</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Access</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Return the solution dictionary</span></span><br><span class="line">            <span class="function"><span class="keyword">inline</span> <span class="keyword">const</span> dictionary&amp; <span class="title">dict</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Current corrector loop index</span></span><br><span class="line">            <span class="function"><span class="keyword">inline</span> label <span class="title">corr</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Current non-orthogonal corrector index</span></span><br><span class="line">            <span class="function"><span class="keyword">inline</span> label <span class="title">corrNonOrtho</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Solution control</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Maximum number of non-orthogonal correctors</span></span><br><span class="line">            <span class="function"><span class="keyword">inline</span> label <span class="title">nNonOrthCorr</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Helper function to identify final non-orthogonal iteration</span></span><br><span class="line">            <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">finalNonOrthogonalIter</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Flag to indicate to solve for momentum</span></span><br><span class="line">            <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">momentumPredictor</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Flag to indicate to solve using transonic algorithm</span></span><br><span class="line">            <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">transonic</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Evolution</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Main control loop</span></span><br><span class="line">            <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">loop</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Non-orthogonal corrector loop</span></span><br><span class="line">            <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">correctNonOrthogonal</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// End namespace Foam</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> NoRepository</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"solutionControlTemplates.C"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"solutionControlI.H"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ************************************************************************* //</span></span><br></pre></td></tr></table></figure>
+<h2 id="simpleControl-H"><a href="#simpleControl-H" class="headerlink" title="simpleControl.H"></a>simpleControl.H</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> simpleControl_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> simpleControl_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"solutionControl.H"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Foam</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*---------------------------------------------------------------------------*\</span></span><br><span class="line"><span class="comment">                         Class simpleControl Declaration</span></span><br><span class="line"><span class="comment">\*---------------------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">simpleControl</span></span></span><br><span class="line"><span class="class">:</span></span><br><span class="line">    <span class="keyword">public</span> solutionControl</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Protected Data</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Initialised flag</span></span><br><span class="line">        <span class="keyword">bool</span> initialised_;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Protected Member Functions</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Read controls from fvSolution dictionary</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Return true if all convergence checks are satisfied</span></span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">criteriaSatisfied</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Disallow default bitwise copy construct</span></span><br><span class="line">        simpleControl(<span class="keyword">const</span> simpleControl&amp;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Disallow default bitwise assignment</span></span><br><span class="line">        <span class="keyword">void</span> <span class="keyword">operator</span>=(<span class="keyword">const</span> simpleControl&amp;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Static Data Members</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Run-time type information</span></span><br><span class="line">        TypeName(<span class="string">"simpleControl"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Constructors</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//- Construct from mesh</span></span><br><span class="line">        simpleControl(fvMesh&amp; mesh);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//- Destructor</span></span><br><span class="line">    <span class="keyword">virtual</span> ~simpleControl();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Member Functions</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Solution control</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//- Loop loop</span></span><br><span class="line">            <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">loop</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// End namespace Foam</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="simpleControl-C"><a href="#simpleControl-C" class="headerlink" title="simpleControl.C"></a>simpleControl.C</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*---------------------------------------------------------------------------*\</span></span><br><span class="line"><span class="comment">  =========                 |</span></span><br><span class="line"><span class="comment">  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox</span></span><br><span class="line"><span class="comment">   \\    /   O peration     |</span></span><br><span class="line"><span class="comment">    \\  /    A nd           | Copyright (C) 2011-2012 OpenFOAM Foundation</span></span><br><span class="line"><span class="comment">     \\/     M anipulation  |</span></span><br><span class="line"><span class="comment">-------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">License</span></span><br><span class="line"><span class="comment">    This file is part of OpenFOAM.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    OpenFOAM is free software: you can redistribute it and/or modify it</span></span><br><span class="line"><span class="comment">    under the terms of the GNU General Public License as published by</span></span><br><span class="line"><span class="comment">    the Free Software Foundation, either version 3 of the License, or</span></span><br><span class="line"><span class="comment">    (at your option) any later version.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    OpenFOAM is distributed in the hope that it will be useful, but WITHOUT</span></span><br><span class="line"><span class="comment">    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span></span><br><span class="line"><span class="comment">    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span></span><br><span class="line"><span class="comment">    for more details.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    You should have received a copy of the GNU General Public License</span></span><br><span class="line"><span class="comment">    along with OpenFOAM.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">\*---------------------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"simpleControl.H"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Time.H"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Foam</span><br><span class="line">&#123;</span><br><span class="line">    defineTypeNameAndDebug(simpleControl, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * Protected Member Functions  * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Foam::simpleControl::<span class="built_in">read</span>()</span><br><span class="line">&#123;</span><br><span class="line">    solutionControl::<span class="built_in">read</span>(<span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> Foam::simpleControl::criteriaSatisfied()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (residualControl_.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> achieved = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">bool</span> checked = <span class="literal">false</span>;    <span class="comment">// safety that some checks were indeed performed</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> dictionary&amp; solverDict = mesh_.solverPerformanceDict();</span><br><span class="line">    forAllConstIter(dictionary, solverDict, iter)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">word</span>&amp; variableName = iter().keyword();</span><br><span class="line">        <span class="keyword">const</span> label fieldI = applyToField(variableName);</span><br><span class="line">        <span class="keyword">if</span> (fieldI != <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="function"><span class="keyword">const</span> List&lt;solverPerformance&gt; <span class="title">sp</span><span class="params">(iter().stream())</span></span>;</span><br><span class="line">            <span class="keyword">const</span> scalar residual = sp.first().initialResidual();</span><br><span class="line"></span><br><span class="line">            checked = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">bool</span> absCheck = residual &lt; residualControl_[fieldI].absTol;</span><br><span class="line">            achieved = achieved &amp;&amp; absCheck;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (debug)</span><br><span class="line">            &#123;</span><br><span class="line">                Info&lt;&lt; algorithmName_ &lt;&lt; <span class="string">" solution statistics:"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">                Info&lt;&lt; <span class="string">"    "</span> &lt;&lt; variableName &lt;&lt; <span class="string">": tolerance = "</span> &lt;&lt; residual</span><br><span class="line">                    &lt;&lt; <span class="string">" ("</span> &lt;&lt; residualControl_[fieldI].absTol &lt;&lt; <span class="string">")"</span></span><br><span class="line">                    &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> checked &amp;&amp; achieved;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line">Foam::simpleControl::simpleControl(fvMesh&amp; mesh)</span><br><span class="line">:</span><br><span class="line">    solutionControl(mesh, <span class="string">"SIMPLE"</span>),</span><br><span class="line">    initialised_(<span class="literal">false</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">read</span>();</span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; nl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (residualControl_.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        Info&lt;&lt; algorithmName_ &lt;&lt; <span class="string">": no convergence criteria found. "</span></span><br><span class="line">            &lt;&lt; <span class="string">"Calculations will run for "</span> &lt;&lt; mesh_.time().endTime().value()</span><br><span class="line">            &lt;&lt; <span class="string">" steps."</span> &lt;&lt; nl &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        Info&lt;&lt; algorithmName_ &lt;&lt; <span class="string">": convergence criteria"</span> &lt;&lt; nl;</span><br><span class="line">        forAll(residualControl_, i)</span><br><span class="line">        &#123;</span><br><span class="line">            Info&lt;&lt; <span class="string">"    field "</span> &lt;&lt; residualControl_[i].name &lt;&lt; token::TAB</span><br><span class="line">                &lt;&lt; <span class="string">" tolerance "</span> &lt;&lt; residualControl_[i].absTol</span><br><span class="line">                &lt;&lt; nl;</span><br><span class="line">        &#125;</span><br><span class="line">        Info&lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * Destructor  * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line">Foam::simpleControl::~simpleControl()</span><br><span class="line">&#123;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> Foam::simpleControl::loop()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">read</span>();</span><br><span class="line"></span><br><span class="line">    Time&amp; time = <span class="keyword">const_cast</span>&lt;Time&amp;&gt;(mesh_.time());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (initialised_)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (criteriaSatisfied())</span><br><span class="line">        &#123;</span><br><span class="line">            Info&lt;&lt; nl &lt;&lt; algorithmName_ &lt;&lt; <span class="string">" solution converged in "</span></span><br><span class="line">                &lt;&lt; time.timeName() &lt;&lt; <span class="string">" iterations"</span> &lt;&lt; nl &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Set to finalise calculation</span></span><br><span class="line">            time.writeAndEnd();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            storePrevIterFields();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        initialised_ = <span class="literal">true</span>;</span><br><span class="line">        storePrevIterFields();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> time.loop();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ************************************************************************* //</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/21/laplacianFoam/" rel="prev" title="laplacianFoam">
+      <i class="fa fa-chevron-left"></i> laplacianFoam
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#代码意义解释"><span class="nav-number">1.</span> <span class="nav-text">代码意义解释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总述"><span class="nav-number">1.1.</span> <span class="nav-text">总述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构"><span class="nav-number">1.2.</span> <span class="nav-text">数据结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源代码-补充代码"><span class="nav-number">2.</span> <span class="nav-text">源代码+补充代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#public-solutionControl-H"><span class="nav-number">2.1.</span> <span class="nav-text">public solutionControl.H</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#simpleControl-H"><span class="nav-number">2.2.</span> <span class="nav-text">simpleControl.H</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#simpleControl-C"><span class="nav-number">2.3.</span> <span class="nav-text">simpleControl.C</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
