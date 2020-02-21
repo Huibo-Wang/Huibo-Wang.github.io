@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-laplacianFoam" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/21/laplacianFoam/" class="article-date">
+  <time datetime="2020-02-21T02:39:50.906Z" itemprop="datePublished">2020-02-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/21/laplacianFoam/">laplacianFoam</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-背景介绍"><a href="#1-背景介绍" class="headerlink" title="1. 背景介绍"></a>1. 背景介绍</h1><p>导热问题，常发生在固体加热，此时由于介质均一，热量的传递仅由热扩散作用决定，因而可忽略对流的影响。</p>
+<h1 id="2-算法解析"><a href="#2-算法解析" class="headerlink" title="2. 算法解析"></a>2. 算法解析</h1><h2 id="2-1-基础知识"><a href="#2-1-基础知识" class="headerlink" title="2.1. 基础知识"></a>2.1. 基础知识</h2><p>N-S方程：<br>$$<br>\rho(\frac{\partial \mathbf u}{\partial t}+\mathbf u \cdot\nabla\mathbf u)=-\nabla p+\mu\nabla^2\mathbf u\tag{1}<br>$$</p>
+<p>$$<br>\nabla\cdot\mathbf u=0\tag{2}<br>$$</p>
+<p>温度方程：<br>$$<br>\frac{\partial(\rho T)}{\partial t}+\nabla(\rho\mathbf U T)=\nabla\cdot(\frac{\lambda}{c_p}\nabla T)+S_T\tag{3}<br>$$</p>
+<h2 id="2-2-控制方程"><a href="#2-2-控制方程" class="headerlink" title="2.2. 控制方程"></a>2.2. 控制方程</h2><p>在本文中，考虑非稳态导热问题，控制方程如下：<br>$$<br>\frac{\partial T}{\partial t}=\nabla\cdot(\frac \lambda {\rho c_p}) \tag{4}<br>$$</p>
+<blockquote>
+<p>问题1：什么情况下散度加梯度等于拉普拉斯</p>
+</blockquote>
+<h1 id="3-代码解析"><a href="#3-代码解析" class="headerlink" title="3. 代码解析"></a>3. 代码解析</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">\*---------------------------------------------------------------------------*/</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"fvCFD.H"</span>       <span class="comment">//这个之前看过</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"simpleControl.H"</span>     <span class="comment">//SIMPLE控件类，用于为SIMPLE循环提供收敛信息检查</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"setRootCase.H"</span>       <span class="comment">//设置算例的根目录</span></span></span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"createTime.H"</span>        <span class="comment">//创建时间对象</span></span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"createMesh.H"</span>        <span class="comment">//创建网格对象</span></span></span><br><span class="line">    <span class="comment">//include "createFields.H"</span></span><br><span class="line">    Info&lt;&lt; <span class="string">"Reading field T\n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    volScalarField T</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"T"</span>,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            mesh,</span><br><span class="line">            IOobject::MUST_READ,</span><br><span class="line">            IOobject::AUTO_WRITE</span><br><span class="line">        ),</span><br><span class="line">        mesh</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; <span class="string">"Reading transportProperties\n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    IOdictionary transportProperties</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"transportProperties"</span>,</span><br><span class="line">            runTime.constant(),</span><br><span class="line">            mesh,</span><br><span class="line">            IOobject::MUST_READ_IF_MODIFIED,</span><br><span class="line">            IOobject::NO_WRITE</span><br><span class="line">        )</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; <span class="string">"Reading diffusivity DT\n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    dimensionedScalar DT</span><br><span class="line">    (</span><br><span class="line">        transportProperties.lookup(<span class="string">"DT"</span>)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function">simpleControl <span class="title">simple</span><span class="params">(mesh)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; <span class="string">"\nCalculating temperature distribution\n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (simple.loop())</span><br><span class="line">    &#123;</span><br><span class="line">        Info&lt;&lt; <span class="string">"Time = "</span> &lt;&lt; runTime.timeName() &lt;&lt; nl &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (simple.correctNonOrthogonal())	<span class="comment">//Non-orthogonal corrector loop，解释如下</span></span><br><span class="line">        &#123;</span><br><span class="line">            solve</span><br><span class="line">            (</span><br><span class="line">                fvm::ddt(T) - fvm::laplacian(DT, T)</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"write.H"</span></span></span><br><span class="line"></span><br><span class="line">        Info&lt;&lt; <span class="string">"ExecutionTime = "</span> &lt;&lt; runTime.elapsedCpuTime() &lt;&lt; <span class="string">" s"</span></span><br><span class="line">            &lt;&lt; <span class="string">"  ClockTime = "</span> &lt;&lt; runTime.elapsedClockTime() &lt;&lt; <span class="string">" s"</span></span><br><span class="line">            &lt;&lt; nl &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; <span class="string">"End\n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ************************************************************************* //</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>correctNonorthogonal</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="keyword">bool</span> Foam::solutionControl::correctNonOrthogonal()</span><br><span class="line"> &#123;</span><br><span class="line">     corrNonOrtho_++;</span><br><span class="line"> </span><br><span class="line">     <span class="keyword">if</span> (debug)</span><br><span class="line">     &#123;</span><br><span class="line">         Info&lt;&lt; algorithmName_ &lt;&lt; <span class="string">" correctNonOrthogonal: corrNonOrtho = "</span></span><br><span class="line">             &lt;&lt; corrNonOrtho_ &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">     &#125;</span><br><span class="line"> </span><br><span class="line">     <span class="keyword">if</span> (corrNonOrtho_ &lt;= nNonOrthCorr_ + <span class="number">1</span>)</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">else</span></span><br><span class="line">     &#123;</span><br><span class="line">         corrNonOrtho_ = <span class="number">0</span>;</span><br><span class="line">         <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/21/laplacianFoam/" data-id="ck6vkzf1s0000agvseevh5pwd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/21/hello-world/" class="article-date">
+  <time datetime="2020-02-21T01:36:33.128Z" itemprop="datePublished">2020-02-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/21/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/21/hello-world/" data-id="ck6vkzf2w0001agvs2bla0o7o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/21/laplacianFoam/">laplacianFoam</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/21/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
