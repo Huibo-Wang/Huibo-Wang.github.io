@@ -24,11 +24,11 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="chemFoam">
 <meta property="og:url" content="http://yoursite.com/2020/02/22/chemFoam/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="一只想要飞的很高很高的笨鸟">
 <meta property="og:description" content="概述基本介绍 定义：化学问题求解器，设计用于单细胞案例，提供与其他化学求解器的比较，使用单细胞网格，并从初始条件创建字段。  求解策略 \frac {\partial(\rho Y)}{\partial t}&#x3D; \omega_i(Y_i,T) h&#x3D;u_0+\frac p \rho+\int_0^t\frac q \rho d\tau&#x3D;u+\frac p \rho p &#x3D; \sum p _ { i">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-02-22T04:55:47.570Z">
-<meta property="article:modified_time" content="2020-02-22T04:55:47.570Z">
+<meta property="article:published_time" content="2020-02-22T07:43:14.893Z">
+<meta property="article:modified_time" content="2020-02-22T07:43:14.893Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>chemFoam | Hexo</title>
+  <title>chemFoam | 一只想要飞的很高很高的笨鸟</title>
   
 
 
@@ -96,7 +96,7 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">一只想要飞的很高很高的笨鸟</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -154,7 +154,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="一只想要飞的很高很高的笨鸟">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -168,7 +168,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-22 12:55:47" itemprop="dateCreated datePublished" datetime="2020-02-22T12:55:47+08:00">2020-02-22</time>
+              <time title="Created: 2020-02-22 15:43:14" itemprop="dateCreated datePublished" datetime="2020-02-22T15:43:14+08:00">2020-02-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -199,7 +199,8 @@
 <h2 id="求解策略"><a href="#求解策略" class="headerlink" title="求解策略"></a>求解策略</h2><script type="math/tex; mode=display">
 \frac {\partial(\rho Y)}{\partial t}= \omega_i(Y_i,T)</script><script type="math/tex; mode=display">
 h=u_0+\frac p \rho+\int_0^t\frac q \rho d\tau=u+\frac p \rho</script><script type="math/tex; mode=display">
-p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i } } { M _ { i } } \frac { R T } { V } = \sum \frac { y _ { i } } { M _ { i } } \underbrace { \frac { m _ { t o t } } { V } } R T</script><p>1)求解化学:目的是得到所涉及的每种物质的反应速率和化学反应产生的热量</p>
+p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i } } { M _ { i } } \frac { R T } { V } = \sum \frac { y _ { i } } { M _ { i } } \underbrace { \frac { m _ { t o t } } { V } } R T</script><a id="more"></a>
+<p>1)求解化学:目的是得到所涉及的每种物质的反应速率和化学反应产生的热量</p>
 <p>2)求解物种方程:求新时间步长的物种浓度</p>
 <p>3)求解能量方程:这里我们得到了新的时间步长的焓(除以热力学和温度)</p>
 <p>4)求解压力方程:计算Rspecific，p和rho需要计算焓</p>
