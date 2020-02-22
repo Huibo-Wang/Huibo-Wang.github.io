@@ -20,27 +20,31 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="概述基本介绍 定义：化学问题求解器，设计用于单细胞案例，提供与其他化学求解器的比较，使用单细胞网格，并从初始条件创建字段。  求解策略 \frac {\partial(\rho Y)}{\partial t}&#x3D; \omega_i(Y_i,T) h&#x3D;u_0+\frac p \rho+\int_0^t\frac q \rho d\tau&#x3D;u+\frac p \rho p &#x3D; \sum p _ { i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chemFoam">
+<meta property="og:url" content="http://yoursite.com/2020/02/22/chemFoam/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="概述基本介绍 定义：化学问题求解器，设计用于单细胞案例，提供与其他化学求解器的比较，使用单细胞网格，并从初始条件创建字段。  求解策略 \frac {\partial(\rho Y)}{\partial t}&#x3D; \omega_i(Y_i,T) h&#x3D;u_0+\frac p \rho+\int_0^t\frac q \rho d\tau&#x3D;u+\frac p \rho p &#x3D; \sum p _ { i">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-22T04:55:47.570Z">
+<meta property="article:modified_time" content="2020-02-22T04:55:47.570Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2020/02/22/chemFoam/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false
+    isHome: false,
+    isPost: true
   };
 </script>
 
-  <title>Hexo</title>
+  <title>chemFoam | Hexo</title>
   
 
 
@@ -137,10 +141,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/22/chemFoam/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -154,8 +158,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/22/chemFoam/" class="post-title-link" itemprop="url">chemFoam</a>
+          chemFoam
         </h1>
 
         <div class="post-meta">
@@ -190,7 +193,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><ol>
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><ol>
 <li>定义：化学问题求解器，设计用于<strong>单细胞</strong>案例，提供与其他化学求解器的比较，使用单细胞网格，并从初始条件创建字段。</li>
 </ol>
 <h2 id="求解策略"><a href="#求解策略" class="headerlink" title="求解策略"></a>求解策略</h2><script type="math/tex; mode=display">
@@ -224,604 +227,33 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
 </ul>
 <h1 id="代码详读"><a href="#代码详读" class="headerlink" title="代码详读"></a>代码详读</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br><span class="line">623</span><br><span class="line">624</span><br><span class="line">625</span><br><span class="line">626</span><br><span class="line">627</span><br><span class="line">628</span><br><span class="line">629</span><br><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br><span class="line">648</span><br><span class="line">649</span><br><span class="line">650</span><br><span class="line">651</span><br><span class="line">652</span><br><span class="line">653</span><br><span class="line">654</span><br><span class="line">655</span><br><span class="line">656</span><br><span class="line">657</span><br><span class="line">658</span><br><span class="line">659</span><br><span class="line">660</span><br><span class="line">661</span><br><span class="line">662</span><br><span class="line">663</span><br><span class="line">664</span><br><span class="line">665</span><br><span class="line">666</span><br><span class="line">667</span><br><span class="line">668</span><br><span class="line">669</span><br><span class="line">670</span><br><span class="line">671</span><br><span class="line">672</span><br><span class="line">673</span><br><span class="line">674</span><br><span class="line">675</span><br><span class="line">676</span><br><span class="line">677</span><br><span class="line">678</span><br><span class="line">679</span><br><span class="line">680</span><br><span class="line">681</span><br><span class="line">682</span><br><span class="line">683</span><br><span class="line">684</span><br><span class="line">685</span><br><span class="line">686</span><br><span class="line">687</span><br><span class="line">688</span><br><span class="line">689</span><br><span class="line">690</span><br><span class="line">691</span><br><span class="line">692</span><br><span class="line">693</span><br><span class="line">694</span><br><span class="line">695</span><br><span class="line">696</span><br><span class="line">697</span><br><span class="line">698</span><br><span class="line">699</span><br><span class="line">700</span><br><span class="line">701</span><br><span class="line">702</span><br><span class="line">703</span><br><span class="line">704</span><br><span class="line">705</span><br><span class="line">706</span><br><span class="line">707</span><br><span class="line">708</span><br><span class="line">709</span><br><span class="line">710</span><br><span class="line">711</span><br><span class="line">712</span><br><span class="line">713</span><br><span class="line">714</span><br><span class="line">715</span><br><span class="line">716</span><br><span class="line">717</span><br><span class="line">718</span><br><span class="line">719</span><br><span class="line">720</span><br><span class="line">721</span><br><span class="line">722</span><br><span class="line">723</span><br><span class="line">724</span><br><span class="line">725</span><br><span class="line">726</span><br><span class="line">727</span><br><span class="line">728</span><br><span class="line">729</span><br><span class="line">730</span><br><span class="line">731</span><br><span class="line">732</span><br><span class="line">733</span><br><span class="line">734</span><br></pre></td><td class="code"><pre><span class="line">Application</span><br><span class="line">    chemFoam</span><br><span class="line"></span><br><span class="line">Description</span><br><span class="line">    Solver <span class="keyword">for</span> chemistry problems</span><br><span class="line">    - designed <span class="keyword">for</span> use on single cell cases to provide comparison against</span><br><span class="line">      other chemistry solvers</span><br><span class="line">    - single cell mesh created on-the-fly</span><br><span class="line">    - fields created on the fly from the initial conditions</span><br><span class="line"></span><br><span class="line">\*---------------------------------------------------------------------------*/</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"fvCFD.H"</span>						<span class="comment">//有限体积法头文件</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"psiReactionThermo.H"</span>			<span class="comment">//基于可压缩性$\phi$的反应混合热物理模型库</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"turbulenceModel.H"</span>			<span class="comment">//湍流模型</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"psiChemistryModel.H"</span>			<span class="comment">//可压缩热力学化学模型</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"chemistrySolver.H"</span>			<span class="comment">//求解化学反应的虚基类</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"OFstream.H"</span>					<span class="comment">//输出文件stream</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"thermoPhysicsTypes.H"</span>			<span class="comment">//热物理模型的类别定义</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"basicMultiComponentMixture.H"</span>	<span class="comment">//多组分混合物。提供质量分数场和辅助函数列表，以查询											混合物成分。</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cellModeller.H"</span>				<span class="comment">//单元格模型的静态集合，以及查找它们的方法。</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    argList::noParallel();		<span class="comment">//禁止并行</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"setRootCase.H"</span></span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"createTime.H"</span></span></span><br><span class="line">------------------------------createSingleCellMesh.H-------------------------</span><br><span class="line">    <span class="comment">//#include "createSingleCellMesh.H"	</span></span><br><span class="line">    <span class="comment">//建立一个1*1*1的体单元并划分一个hex网格</span></span><br><span class="line">    Info&lt;&lt; <span class="string">"Constructing single cell mesh"</span> &lt;&lt; nl &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function">labelList <span class="title">owner</span><span class="params">(<span class="number">6</span>, label(<span class="number">0</span>))</span></span>;	<span class="comment">//数组[6]，每个赋值0，不是特别理解</span></span><br><span class="line">    <span class="function">labelList <span class="title">neighbour</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function">pointField <span class="title">points</span><span class="params">(<span class="number">8</span>)</span></span>;</span><br><span class="line">    points[<span class="number">0</span>] = <span class="built_in">vector</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    points[<span class="number">1</span>] = <span class="built_in">vector</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    points[<span class="number">2</span>] = <span class="built_in">vector</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    points[<span class="number">3</span>] = <span class="built_in">vector</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    points[<span class="number">4</span>] = <span class="built_in">vector</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    points[<span class="number">5</span>] = <span class="built_in">vector</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    points[<span class="number">6</span>] = <span class="built_in">vector</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    points[<span class="number">7</span>] = <span class="built_in">vector</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> cellModel&amp; hexa = *(cellModeller::lookup(<span class="string">"hex"</span>));</span><br><span class="line">    <span class="comment">//cellModeller::lookup: Look up a model by name and return a (const     cellModeller) pointer to the model or NULL</span></span><br><span class="line">    faceList faces = hexa.modelFaces();	<span class="comment">//返回模型的面列表</span></span><br><span class="line">    </span><br><span class="line">    fvMesh mesh</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            fvMesh::defaultRegion,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            runTime,</span><br><span class="line">            IOobject::READ_IF_PRESENT</span><br><span class="line">        ),</span><br><span class="line">        xferMove&lt;Field&lt;<span class="built_in">vector</span>&gt; &gt;(points),	<span class="comment">//传输列表中的参数</span></span><br><span class="line"><span class="comment">//Construct by transferring the contents of the \a arg</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">template&lt;class T&gt;</span></span><br><span class="line"><span class="comment">inline Foam::Xfer&lt;T&gt; Foam::xferMove(T&amp; t)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    return Foam::Xfer&lt;T&gt;(t, true);</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">template&lt;class T&gt;</span></span><br><span class="line"><span class="comment">inline Foam::Xfer&lt;T&gt;::Xfer(T&amp; t, bool allowTransfer)</span></span><br><span class="line"><span class="comment">:</span></span><br><span class="line"><span class="comment">    ptr_(new T)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    if (allowTransfer)</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        ptr_-&gt;transfer(t);</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    else</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        ptr_-&gt;operator=(t);</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">template&lt;class T&gt;</span></span><br><span class="line"><span class="comment">void Foam::List&lt;T&gt;::transfer(List&lt;T&gt;&amp; a)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    if (this-&gt;v_) delete[] this-&gt;v_;</span></span><br><span class="line"><span class="comment">    this-&gt;size_ = a.size_;	//列表中元素个数</span></span><br><span class="line"><span class="comment">    this-&gt;v_ = a.v_;	//列表中矢量</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    a.size_ = 0;</span></span><br><span class="line"><span class="comment">    a.v_ = 0;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">    faces.xfer(),</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">template&lt;class T&gt;</span></span><br><span class="line"><span class="comment">inline Foam::Xfer&lt;Foam::List&lt;T&gt; &gt; Foam::List&lt;T&gt;::xfer()</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    return xferMove(*this);</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">        owner.xfer(),</span><br><span class="line">        neighbour.xfer()</span><br><span class="line">    );</span><br><span class="line">    </span><br><span class="line">    <span class="function">List&lt;polyPatch*&gt; <span class="title">patches</span><span class="params">(<span class="number">1</span>)</span></span>;	<span class="comment">//创建一个边界</span></span><br><span class="line">    </span><br><span class="line">    patches[<span class="number">0</span>] = <span class="keyword">new</span> emptyPolyPatch <span class="comment">//用于二维几何的空的前后面</span></span><br><span class="line">    (</span><br><span class="line">        <span class="string">"boundary"</span>,</span><br><span class="line">        <span class="number">6</span>,</span><br><span class="line">        <span class="number">0</span>,</span><br><span class="line">        <span class="number">0</span>,</span><br><span class="line">        mesh.boundaryMesh(),</span><br><span class="line">        emptyPolyPatch::typeName</span><br><span class="line">    );</span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">//- Construct from components</span></span><br><span class="line"><span class="comment">emptyPolyPatch</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">    const word&amp; name,</span></span><br><span class="line"><span class="comment">    const label size,</span></span><br><span class="line"><span class="comment">    const label start,</span></span><br><span class="line"><span class="comment">    const label index,</span></span><br><span class="line"><span class="comment">    const polyBoundaryMesh&amp; bm,</span></span><br><span class="line"><span class="comment">    const word&amp; patchType</span></span><br><span class="line"><span class="comment">);</span></span><br><span class="line"><span class="comment">:</span></span><br><span class="line"><span class="comment">	polyPatch(name, size, start, index, bm, patchType)</span></span><br><span class="line"><span class="comment">&#123;&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">    mesh.addFvPatches(patches);</span><br><span class="line">------------------------------createSingleCellMesh.H-------------------------</span><br><span class="line">    </span><br><span class="line">------------------------------createFields.H---------------------------------</span><br><span class="line">    <span class="comment">//#include "createFields.H"</span></span><br><span class="line">    <span class="keyword">if</span> (mesh.nCells() != <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        FatalErrorIn(args.executable())</span><br><span class="line">            &lt;&lt; <span class="string">"Solver only applicable to single cell cases"</span></span><br><span class="line">            &lt;&lt; <span class="built_in">exit</span>(FatalError);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; <span class="string">"Reading initial conditions.\n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    IOdictionary initialConditions	</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"initialConditions"</span>,</span><br><span class="line">            runTime.constant(),</span><br><span class="line">            runTime,</span><br><span class="line">            IOobject::MUST_READ_IF_MODIFIED,</span><br><span class="line">            IOobject::NO_WRITE</span><br><span class="line">        )</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    scalar p0 = readScalar(initialConditions.lookup(<span class="string">"p"</span>));	<span class="comment">//初始压力</span></span><br><span class="line">    scalar T0 = readScalar(initialConditions.lookup(<span class="string">"T"</span>));	<span class="comment">//初始温度</span></span><br><span class="line"></span><br><span class="line">------------------------------createBaseFields.H-----------------------------       </span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"createBaseFields.H"</span></span></span><br><span class="line"><span class="comment">// write base thermo fields - not registered since will be re-read by</span></span><br><span class="line"><span class="comment">// thermo package</span></span><br><span class="line"></span><br><span class="line">Info&lt;&lt; <span class="string">"Creating base fields for time "</span> &lt;&lt; runTime.timeName() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#123;</span><br><span class="line">    volScalarField Ydefault</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"Ydefault"</span>,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            mesh,</span><br><span class="line">            IOobject::READ_IF_PRESENT,</span><br><span class="line">            IOobject::NO_WRITE,</span><br><span class="line">            <span class="literal">false</span></span><br><span class="line">        ),</span><br><span class="line">        mesh,</span><br><span class="line">        dimensionedScalar(<span class="string">"Ydefault"</span>, dimless, <span class="number">1</span>)</span><br><span class="line">        <span class="comment">//- Construct given a name, a value and its dimensionSet.</span></span><br><span class="line">        <span class="comment">//dimensioned(const word&amp;, const dimensionSet&amp;, const Type);</span></span><br><span class="line">        <span class="comment">//extern const dimensionSet dimless;        </span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    Ydefault.<span class="built_in">write</span>();	<span class="comment">//输出Ydefault</span></span><br><span class="line"></span><br><span class="line">    volScalarField p</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"p"</span>,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            mesh,</span><br><span class="line">            IOobject::READ_IF_PRESENT,</span><br><span class="line">            IOobject::NO_WRITE,</span><br><span class="line">            <span class="literal">false</span></span><br><span class="line">        ),</span><br><span class="line">        mesh,</span><br><span class="line">        dimensionedScalar(<span class="string">"p"</span>, dimPressure, p0)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    p.<span class="built_in">write</span>();</span><br><span class="line"></span><br><span class="line">    volScalarField T</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"T"</span>,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            mesh,</span><br><span class="line">            IOobject::READ_IF_PRESENT,</span><br><span class="line">            IOobject::NO_WRITE,</span><br><span class="line">            <span class="literal">false</span></span><br><span class="line">        ),</span><br><span class="line">        mesh,</span><br><span class="line">        dimensionedScalar(<span class="string">"T"</span>, dimTemperature, T0)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    T.<span class="built_in">write</span>();</span><br><span class="line">&#125;</span><br><span class="line">------------------------------createBaseFields.H----------------------------- </span><br><span class="line">    </span><br><span class="line">    Info&lt;&lt; nl &lt;&lt; <span class="string">"Reading thermophysicalProperties"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="function">autoPtr&lt;psiChemistryModel&gt; <span class="title">pChemistry</span><span class="params">(psiChemistryModel::New(mesh))</span></span>;</span><br><span class="line"><span class="comment">//psiChemistryModel.H:Chemistry model for compressibility-based thermodynamics</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Foam::autoPtr&lt;Foam::psiChemistryModel&gt; Foam::psiChemistryModel::New</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">    const fvMesh&amp; mesh</span></span><br><span class="line"><span class="comment">)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    return basicChemistryModel::New&lt;psiChemistryModel&gt;(mesh);</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">//- Generic New for each of the related chemistry model</span></span><br><span class="line"><span class="comment">template&lt;class Thermo&gt;</span></span><br><span class="line"><span class="comment">static autoPtr&lt;Thermo&gt; New(const fvMesh&amp;);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Foam::basicChemistryModel::basicChemistryModel(const fvMesh&amp; mesh)</span></span><br><span class="line"><span class="comment">:</span></span><br><span class="line"><span class="comment">    IOdictionary</span></span><br><span class="line"><span class="comment">    (</span></span><br><span class="line"><span class="comment">        IOobject</span></span><br><span class="line"><span class="comment">        (</span></span><br><span class="line"><span class="comment">            "chemistryProperties",</span></span><br><span class="line"><span class="comment">            mesh.time().constant(),</span></span><br><span class="line"><span class="comment">            mesh,</span></span><br><span class="line"><span class="comment">            IOobject::MUST_READ_IF_MODIFIED,</span></span><br><span class="line"><span class="comment">            IOobject::NO_WRITE</span></span><br><span class="line"><span class="comment">        )</span></span><br><span class="line"><span class="comment">    ),</span></span><br><span class="line"><span class="comment">    mesh_(mesh),</span></span><br><span class="line"><span class="comment">    chemistry_(lookup("chemistry")),</span></span><br><span class="line"><span class="comment">    deltaTChemIni_(readScalar(lookup("initialChemicalTimeStep"))),</span></span><br><span class="line"><span class="comment">    deltaTChem_</span></span><br><span class="line"><span class="comment">    (</span></span><br><span class="line"><span class="comment">        IOobject</span></span><br><span class="line"><span class="comment">        (</span></span><br><span class="line"><span class="comment">            "deltaTChem",</span></span><br><span class="line"><span class="comment">            mesh.time().constant(),</span></span><br><span class="line"><span class="comment">            mesh,</span></span><br><span class="line"><span class="comment">            IOobject::NO_READ,</span></span><br><span class="line"><span class="comment">            IOobject::NO_WRITE</span></span><br><span class="line"><span class="comment">        ),</span></span><br><span class="line"><span class="comment">        mesh,</span></span><br><span class="line"><span class="comment">        dimensionedScalar("deltaTChem0", dimTime, deltaTChemIni_)</span></span><br><span class="line"><span class="comment">    )</span></span><br><span class="line"><span class="comment">&#123;&#125;</span></span><br><span class="line"><span class="comment">*/</span>    </span><br><span class="line">        </span><br><span class="line">    psiChemistryModel&amp; chemistry = pChemistry();</span><br><span class="line">    scalar dtChem = refCast&lt;<span class="keyword">const</span> psiChemistryModel&gt;(chemistry).deltaTChem()[<span class="number">0</span>];</span><br><span class="line">    <span class="comment">//初始时刻化学反应的时间步</span></span><br><span class="line">    <span class="comment">//refCast：类型转换模板函数</span></span><br><span class="line"></span><br><span class="line">    psiReactionThermo&amp; thermo = chemistry.thermo();</span><br><span class="line">    thermo.validate(args.executable(), <span class="string">"h"</span>);</span><br><span class="line"></span><br><span class="line">    basicMultiComponentMixture&amp; composition = thermo.composition();</span><br><span class="line">    <span class="comment">//- Return the composition of the multi-component mixture</span></span><br><span class="line">    <span class="comment">//- 物种名+质量分数</span></span><br><span class="line">    PtrList&lt;volScalarField&gt;&amp; Y = composition.Y();</span><br><span class="line"></span><br><span class="line">    volScalarField rho</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"rho"</span>,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            runTime,</span><br><span class="line">            IOobject::NO_READ,</span><br><span class="line">            IOobject::AUTO_WRITE</span><br><span class="line">        ),</span><br><span class="line">        thermo.rho()	<span class="comment">//return p_*psi_;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    volScalarField&amp; p = thermo.p();	<span class="comment">//return p_</span></span><br><span class="line"></span><br><span class="line">    volScalarField Rspecific	<span class="comment">//普适气体常数</span></span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"Rspecific"</span>,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            runTime,</span><br><span class="line">            IOobject::NO_READ,</span><br><span class="line">            IOobject::AUTO_WRITE</span><br><span class="line">        ),</span><br><span class="line">        mesh,</span><br><span class="line">        dimensionedScalar</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"zero"</span>,</span><br><span class="line">            dimensionSet(dimEnergy/dimMass/dimTemperature),</span><br><span class="line">            <span class="number">0.0</span></span><br><span class="line">        )</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    volVectorField U	<span class="comment">//讲道理，感觉也没用到速度场呀，建了没吊用</span></span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"U"</span>,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            runTime,</span><br><span class="line">            IOobject::NO_READ,</span><br><span class="line">            IOobject::NO_WRITE</span><br><span class="line">        ),</span><br><span class="line">        mesh,</span><br><span class="line">        dimensionedVector(<span class="string">"zero"</span>, dimVelocity, <span class="built_in">vector</span>::zero),</span><br><span class="line">        p.boundaryField().types()</span><br><span class="line">    );</span><br><span class="line">------------------------------createPhi.H------------------------------------</span><br><span class="line">    <span class="comment">//#include "createPhi.H"</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">ifndef</span> createPhi_H</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">define</span> createPhi_H</span></span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; <span class="string">"Reading/calculating face flux field phi\n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    surfaceScalarField phi</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"phi"</span>,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            mesh,</span><br><span class="line">            IOobject::READ_IF_PRESENT,</span><br><span class="line">            IOobject::AUTO_WRITE</span><br><span class="line">        ),</span><br><span class="line">        linearInterpolate(U) &amp; mesh.Sf()	<span class="comment">//线性插值</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">------------------------------createPhi.H------------------------------------</span><br><span class="line"></span><br><span class="line">    Info &lt;&lt; <span class="string">"Creating turbulence model.\n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    autoPtr&lt;compressible::turbulenceModel&gt; turbulence</span><br><span class="line">    (</span><br><span class="line">        compressible::turbulenceModel::New</span><br><span class="line">        (</span><br><span class="line">            rho,</span><br><span class="line">            U,</span><br><span class="line">            phi,</span><br><span class="line">            thermo</span><br><span class="line">        )</span><br><span class="line">    );</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">autoPtr&lt;turbulenceModel&gt; turbulenceModel::New</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">    const volScalarField&amp; rho,</span></span><br><span class="line"><span class="comment">    const volVectorField&amp; U,</span></span><br><span class="line"><span class="comment">    const surfaceScalarField&amp; phi,</span></span><br><span class="line"><span class="comment">    const fluidThermo&amp; thermophysicalModel,</span></span><br><span class="line"><span class="comment">    const word&amp; turbulenceModelName</span></span><br><span class="line"><span class="comment">)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    // get model name, but do not register the dictionary</span></span><br><span class="line"><span class="comment">    // otherwise it is registered in the database twice</span></span><br><span class="line"><span class="comment">    const word modelType</span></span><br><span class="line"><span class="comment">    (</span></span><br><span class="line"><span class="comment">        IOdictionary</span></span><br><span class="line"><span class="comment">        (</span></span><br><span class="line"><span class="comment">            IOobject</span></span><br><span class="line"><span class="comment">            (</span></span><br><span class="line"><span class="comment">                "turbulenceProperties",</span></span><br><span class="line"><span class="comment">                U.time().constant(),</span></span><br><span class="line"><span class="comment">                U.db(),</span></span><br><span class="line"><span class="comment">                IOobject::MUST_READ_IF_MODIFIED,</span></span><br><span class="line"><span class="comment">                IOobject::NO_WRITE,</span></span><br><span class="line"><span class="comment">                false</span></span><br><span class="line"><span class="comment">            )</span></span><br><span class="line"><span class="comment">        ).lookup("simulationType")</span></span><br><span class="line"><span class="comment">    );</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Info&lt;&lt; "Selecting turbulence model type " &lt;&lt; modelType &lt;&lt; endl;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    turbulenceModelConstructorTable::iterator cstrIter =</span></span><br><span class="line"><span class="comment">        turbulenceModelConstructorTablePtr_-&gt;find(modelType);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    if (cstrIter == turbulenceModelConstructorTablePtr_-&gt;end())</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        FatalErrorIn</span></span><br><span class="line"><span class="comment">        (</span></span><br><span class="line"><span class="comment">            "turbulenceModel::New(const volScalarField&amp;, "</span></span><br><span class="line"><span class="comment">            "const volVectorField&amp;, const surfaceScalarField&amp;, "</span></span><br><span class="line"><span class="comment">            "fluidThermo&amp;, const word&amp;)"</span></span><br><span class="line"><span class="comment">        )   &lt;&lt; "Unknown turbulenceModel type "</span></span><br><span class="line"><span class="comment">            &lt;&lt; modelType &lt;&lt; nl &lt;&lt; nl</span></span><br><span class="line"><span class="comment">            &lt;&lt; "Valid turbulenceModel types:" &lt;&lt; endl</span></span><br><span class="line"><span class="comment">            &lt;&lt; turbulenceModelConstructorTablePtr_-&gt;sortedToc()</span></span><br><span class="line"><span class="comment">            &lt;&lt; exit(FatalError);</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    return autoPtr&lt;turbulenceModel&gt;</span></span><br><span class="line"><span class="comment">    (</span></span><br><span class="line"><span class="comment">        cstrIter()(rho, U, phi, thermophysicalModel, turbulenceModelName)</span></span><br><span class="line"><span class="comment">    );</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">    <span class="function">OFstream <span class="title">post</span><span class="params">(args.path()/<span class="string">"chemFoam.out"</span>)</span></span>;</span><br><span class="line">    post&lt;&lt; <span class="string">"# Time"</span> &lt;&lt; token::TAB &lt;&lt; <span class="string">"Temperature [K]"</span> &lt;&lt; token::TAB</span><br><span class="line">        &lt;&lt; <span class="string">"Pressure [Pa]"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">------------------------------createFields.H---------------------------------</span><br><span class="line">------------------------------readInitialConditions.H------------------------   </span><br><span class="line">    <span class="comment">//#include "readInitialConditions.H"</span></span><br><span class="line">    <span class="function"><span class="keyword">word</span> <span class="title">constProp</span><span class="params">(initialConditions.lookup(<span class="string">"constantProperty"</span>))</span></span>;</span><br><span class="line">    <span class="keyword">if</span> ((constProp != <span class="string">"pressure"</span>) &amp;&amp; (constProp != <span class="string">"volume"</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        FatalError &lt;&lt; <span class="string">"in initialConditions, unknown constantProperty type "</span></span><br><span class="line">            &lt;&lt; constProp &lt;&lt; nl &lt;&lt; <span class="string">" Valid types are: pressure volume."</span></span><br><span class="line">            &lt;&lt; <span class="built_in">abort</span>(FatalError);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">word</span> <span class="title">fractionBasis</span><span class="params">(initialConditions.lookup(<span class="string">"fractionBasis"</span>))</span></span>;</span><br><span class="line">    <span class="keyword">if</span> ((fractionBasis != <span class="string">"mass"</span>) &amp;&amp; (fractionBasis != <span class="string">"mole"</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        FatalError &lt;&lt; <span class="string">"in initialConditions, unknown fractionBasis type "</span> &lt;&lt; nl</span><br><span class="line">            &lt;&lt; <span class="string">"Valid types are: mass or mole."</span></span><br><span class="line">            &lt;&lt; fractionBasis &lt;&lt; <span class="built_in">abort</span>(FatalError);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    label nSpecie = Y.<span class="built_in">size</span>();	<span class="comment">//PtrList&lt;volScalarField&gt;&amp; Y = composition.Y();</span></span><br><span class="line">    <span class="function">PtrList&lt;gasHThermoPhysics&gt; <span class="title">specieData</span><span class="params">(Y.<span class="built_in">size</span>())</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">typedef</span></span><br><span class="line"><span class="comment">     sutherlandTransport</span></span><br><span class="line"><span class="comment">     &lt;</span></span><br><span class="line"><span class="comment">         species::thermo</span></span><br><span class="line"><span class="comment">         &lt;</span></span><br><span class="line"><span class="comment">             janafThermo</span></span><br><span class="line"><span class="comment">             &lt;</span></span><br><span class="line"><span class="comment">                 perfectGas&lt;specie&gt;</span></span><br><span class="line"><span class="comment">             &gt;,</span></span><br><span class="line"><span class="comment">             sensibleEnthalpy</span></span><br><span class="line"><span class="comment">         &gt;</span></span><br><span class="line"><span class="comment">     &gt; gasHThermoPhysics;</span></span><br><span class="line"><span class="comment">*/</span>        </span><br><span class="line">    forAll(specieData, i)</span><br><span class="line">    &#123;</span><br><span class="line">        specieData.<span class="built_in">set</span></span><br><span class="line">        <span class="comment">//inline autoPtr&lt;T&gt; set(const label, const autoPtr&lt;T&gt;&amp;);</span></span><br><span class="line">        <span class="comment">//Set element. Return old element (can be NULL).</span></span><br><span class="line">        <span class="comment">//No checks on new element.</span></span><br><span class="line">        (</span><br><span class="line">            i,</span><br><span class="line">            <span class="keyword">new</span> gasHThermoPhysics</span><br><span class="line">            (</span><br><span class="line">                <span class="keyword">dynamic_cast</span>&lt;<span class="keyword">const</span> reactingMixture&lt;gasHThermoPhysics&gt;&amp;&gt;</span><br><span class="line">                    (thermo).speciesData()[i]</span><br><span class="line">            )</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">scalarList <span class="title">Y0</span><span class="params">(nSpecie, <span class="number">0.0</span>)</span></span>;</span><br><span class="line">    <span class="function">scalarList <span class="title">X0</span><span class="params">(nSpecie, <span class="number">0.0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">dictionary <span class="title">fractions</span><span class="params">(initialConditions.subDict(<span class="string">"fractions"</span>))</span></span>; <span class="comment">//subDict注意下</span></span><br><span class="line">    <span class="keyword">if</span> (fractionBasis == <span class="string">"mole"</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        forAll(Y, i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">const</span> <span class="keyword">word</span>&amp; name = Y[i].name();</span><br><span class="line">            <span class="keyword">if</span> (fractions.found(name))</span><br><span class="line">            &#123;</span><br><span class="line">                X0[i] = readScalar(fractions.lookup(name));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        scalar mw = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">const</span> scalar mTot = sum(X0);	<span class="comment">//显示摩尔数值加和求摩尔分数</span></span><br><span class="line">        forAll(Y, i)</span><br><span class="line">        &#123;</span><br><span class="line">            X0[i] /= mTot;	<span class="comment">//计算摩尔分数</span></span><br><span class="line">            mw += specieData[i].W()*X0[i];	<span class="comment">//W():摩尔质量，单位kg/kmol</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        forAll(Y, i)</span><br><span class="line">        &#123;</span><br><span class="line">            Y0[i] = X0[i]*specieData[i].W()/mw;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>  <span class="comment">// mass fraction</span></span><br><span class="line">    &#123;</span><br><span class="line">        forAll(Y, i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">const</span> <span class="keyword">word</span>&amp; name = Y[i].name();</span><br><span class="line">            <span class="keyword">if</span> (fractions.found(name))</span><br><span class="line">            &#123;</span><br><span class="line">                Y0[i] = readScalar(fractions.lookup(name));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        scalar invW = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">const</span> scalar mTot = sum(Y0);</span><br><span class="line">        forAll(Y, i)</span><br><span class="line">        &#123;</span><br><span class="line">            Y0[i] /= mTot;</span><br><span class="line">            invW += Y0[i]/specieData[i].W();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> scalar mw = <span class="number">1.0</span>/invW;</span><br><span class="line"></span><br><span class="line">        forAll(Y, i)</span><br><span class="line">        &#123;</span><br><span class="line">            X0[i] = Y0[i]*mw/specieData[i].W();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    scalar h0 = <span class="number">0.0</span>;</span><br><span class="line">    forAll(Y, i)</span><br><span class="line">    &#123;</span><br><span class="line">        Y[i] = Y0[i];</span><br><span class="line">        <span class="comment">//Y[i]:Return the mass-fraction field for a specie given by index</span></span><br><span class="line">        h0 += Y0[i]*specieData[i].Hs(p[<span class="number">0</span>], T0);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//Sensible enthalpy [J/kg]. </span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    Foam::species::thermo&lt;Thermo, Type&gt;::Hs(const scalar p, const scalar T) const</span></span><br><span class="line"><span class="comment">   &#123;</span></span><br><span class="line"><span class="comment">       return this-&gt;hs(p, T)/this-&gt;W();</span></span><br><span class="line"><span class="comment">   &#125;</span></span><br><span class="line"><span class="comment">   </span></span><br><span class="line"><span class="comment">   Hs = Ha(p,T) - Hc; //Hs:Sensible enthalpy; Ha:absolute enthalpy; Hc:chemical enthalpy </span></span><br><span class="line"><span class="comment">   </span></span><br><span class="line"><span class="comment">   */</span>        </span><br><span class="line"></span><br><span class="line">    thermo.he() = dimensionedScalar(<span class="string">"h"</span>, dimEnergy/dimMass, h0);</span><br><span class="line">    <span class="comment">//Enthalpy/Internal energy [J/kg]</span></span><br><span class="line">    thermo.correct();</span><br><span class="line">    <span class="comment">//更新特性</span></span><br><span class="line"></span><br><span class="line">    rho = thermo.rho();</span><br><span class="line">    scalar rho0 = rho[<span class="number">0</span>];</span><br><span class="line">    scalar u0 = h0 - p0/rho0;</span><br><span class="line">    scalar R0 = p0/(rho0*T0);</span><br><span class="line">    Rspecific[<span class="number">0</span>] = R0;	</span><br><span class="line">    <span class="comment">//Rspecific[0] = 1000.0*constant::physicoChemical::R.value()*invW;</span></span><br><span class="line"></span><br><span class="line">    scalar integratedHeat = <span class="number">0.0</span>;	<span class="comment">//the heat supplied to the system. </span></span><br><span class="line"></span><br><span class="line">    Info &lt;&lt; constProp &lt;&lt; <span class="string">" will be held constant."</span> &lt;&lt; nl</span><br><span class="line">        &lt;&lt; <span class="string">" p   = "</span> &lt;&lt; p[<span class="number">0</span>] &lt;&lt; <span class="string">" [Pa]"</span> &lt;&lt; nl</span><br><span class="line">        &lt;&lt; <span class="string">" T   = "</span> &lt;&lt; thermo.T()[<span class="number">0</span>] &lt;&lt; <span class="string">" [K] "</span> &lt;&lt; nl</span><br><span class="line">        &lt;&lt; <span class="string">" rho = "</span> &lt;&lt; rho[<span class="number">0</span>] &lt;&lt; <span class="string">" [kg/m3]"</span> &lt;&lt; nl</span><br><span class="line">        &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">------------------------------readInitialConditions.H------------------------      </span><br><span class="line">   </span><br><span class="line">    <span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; <span class="string">"\nStarting time loop\n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">while</span> (runTime.<span class="built_in">run</span>())</span><br><span class="line">    &#123;</span><br><span class="line">------------------------------readControls.H----------------------------------       </span><br><span class="line">        <span class="comment">//#include "readControls.H"</span></span><br><span class="line">        <span class="keyword">if</span> (runTime.controlDict().lookupOrDefault(<span class="string">"suppressSolverInfo"</span>, <span class="literal">false</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            lduMatrix::debug = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        <span class="function">Switch <span class="title">adjustTimeStep</span><span class="params">(runTime.controlDict().lookup(<span class="string">"adjustTimeStep"</span>))</span></span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">        //- The various text representations for a switch value.</span></span><br><span class="line"><span class="comment">        //  These also correspond to the entries in names.</span></span><br><span class="line"><span class="comment">        enum switchType</span></span><br><span class="line"><span class="comment">        &#123;</span></span><br><span class="line"><span class="comment">            FALSE   = 0,  TRUE   = 1,</span></span><br><span class="line"><span class="comment">            OFF     = 2,  ON     = 3,</span></span><br><span class="line"><span class="comment">            NO      = 4,  YES    = 5,</span></span><br><span class="line"><span class="comment">            NO_1    = 6,  YES_1  = 7,</span></span><br><span class="line"><span class="comment">            FALSE_1 = 8,  TRUE_1 = 9,</span></span><br><span class="line"><span class="comment">            NONE    = 10, PLACEHOLDER = 11,</span></span><br><span class="line"><span class="comment">            INVALID</span></span><br><span class="line"><span class="comment">        &#125;;</span></span><br><span class="line"><span class="comment">*/</span>    </span><br><span class="line">        <span class="function">scalar <span class="title">maxDeltaT</span><span class="params">(readScalar(runTime.controlDict().lookup(<span class="string">"maxDeltaT"</span>)))</span></span>;     ------------------------------readControls.H----------------------------------</span><br><span class="line">            </span><br><span class="line">------------------------------setDeltaT.H------------------------------------- </span><br><span class="line">        <span class="comment">//#include "setDeltaT.H"</span></span><br><span class="line">        <span class="keyword">if</span> (adjustTimeStep)</span><br><span class="line">        &#123;</span><br><span class="line">            runTime.setDeltaT(<span class="built_in">min</span>(dtChem, maxDeltaT));</span><br><span class="line">            Info&lt;&lt; <span class="string">"deltaT = "</span> &lt;&lt;  runTime.deltaT().value() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;      </span><br><span class="line">------------------------------setDeltaT.H-------------------------------------</span><br><span class="line">        </span><br><span class="line">        runTime++;</span><br><span class="line">        Info&lt;&lt; <span class="string">"Time = "</span> &lt;&lt; runTime.timeName() &lt;&lt; nl &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">------------------------------solveChemistry.H--------------------------------</span><br><span class="line">        <span class="comment">//#include "solveChemistry.H"</span></span><br><span class="line">        dtChem = chemistry.solve(runTime.deltaT().value());</span><br><span class="line">        <span class="comment">//solve:</span></span><br><span class="line">        <span class="comment">//- Solve the reaction system for the given time step</span></span><br><span class="line">        <span class="comment">//  and return the characteristic time</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> Foam::dimensionedScalar Foam::TimeState::deltaT() const</span></span><br><span class="line"><span class="comment"> &#123;</span></span><br><span class="line"><span class="comment">     return dimensionedScalar("deltaT", dimTime, deltaT_);</span></span><br><span class="line"><span class="comment"> &#125;</span></span><br><span class="line"><span class="comment">*/</span>        </span><br><span class="line">        scalar Sh = chemistry.Sh()()[<span class="number">0</span>]/rho[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">//- Return source for enthalpy equation [kg/m/s3]</span></span><br><span class="line">        integratedHeat += Sh*runTime.deltaT().value();</span><br><span class="line">------------------------------solveChemistry.H--------------------------------  </span><br><span class="line">    </span><br><span class="line">------------------------------YEqn.H------------------------------------------                 <span class="comment">//#include "YEqn.H"       </span></span><br><span class="line">        &#123;</span><br><span class="line">            forAll(Y, specieI)</span><br><span class="line">            &#123;</span><br><span class="line">                volScalarField&amp; Yi = Y[specieI];</span><br><span class="line"></span><br><span class="line">                solve</span><br><span class="line">                (</span><br><span class="line">                    fvm::ddt(rho, Yi) - chemistry.RR(specieI),</span><br><span class="line">                    <span class="comment">//- Return access to chemical source terms [kg/m3/s]</span></span><br><span class="line">                    mesh.solver(<span class="string">"Yi"</span>)</span><br><span class="line">                );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">一、solve the matrix using Gaussian elimination with pivoting,</span></span><br><span class="line"><span class="comment">//  returning the solution in the source</span></span><br><span class="line"><span class="comment">template&lt;class Type&gt;</span></span><br><span class="line"><span class="comment">void solve(scalarSquareMatrix&amp; matrix, List&lt;Type&gt;&amp; source);</span></span><br><span class="line"><span class="comment">   </span></span><br><span class="line"><span class="comment">二、RR:basicChemistryModel.H</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">//- Return const access to chemical source terms [kg/m3/s]</span></span><br><span class="line"><span class="comment">virtual const DimensionedField&lt;scalar, volMesh&gt;&amp; RR</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">      const label i</span></span><br><span class="line"><span class="comment">) const = 0;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">三、</span></span><br><span class="line"><span class="comment">const Foam::dictionary&amp; Foam::solution::solver(const word&amp; name) const</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    if (debug)</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        InfoIn("solution::solver(const word&amp;)")</span></span><br><span class="line"><span class="comment">            &lt;&lt; "Lookup solver for " &lt;&lt; name &lt;&lt; endl;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    return solvers_.subDict(name);</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span>     </span><br><span class="line">------------------------------YEqn.H------------------------------------------</span><br><span class="line">    </span><br><span class="line">------------------------------hEqn.H------------------------------------------</span><br><span class="line">        <span class="comment">//#include "hEqn.H"</span></span><br><span class="line">        &#123;</span><br><span class="line">            volScalarField&amp; h = thermo.he();</span><br><span class="line">        </span><br><span class="line">            <span class="keyword">if</span> (constProp == <span class="string">"volume"</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                h[<span class="number">0</span>] = u0 + p[<span class="number">0</span>]/rho[<span class="number">0</span>] + integratedHeat;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                h[<span class="number">0</span>] = h0 + integratedHeat;</span><br><span class="line">            &#125;</span><br><span class="line">        </span><br><span class="line">            thermo.correct();	<span class="comment">//根据焓更新物性</span></span><br><span class="line">        &#125;</span><br><span class="line">------------------------------hEqn.H------------------------------------------</span><br><span class="line">    </span><br><span class="line">------------------------------pEqn.H------------------------------------------    </span><br><span class="line">        <span class="comment">//#include "pEqn.H"</span></span><br><span class="line">        &#123;</span><br><span class="line">            rho = thermo.rho();</span><br><span class="line">            <span class="keyword">if</span> (constProp == <span class="string">"volume"</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                scalar invW = <span class="number">0.0</span>;</span><br><span class="line">                forAll(Y, i)</span><br><span class="line">                &#123;</span><br><span class="line">                    invW += Y[i][<span class="number">0</span>]/specieData[i].W();</span><br><span class="line">                &#125;</span><br><span class="line">        </span><br><span class="line">                Rspecific[<span class="number">0</span>] = <span class="number">1000.0</span>*constant::physicoChemical::R.value()*invW;</span><br><span class="line">        </span><br><span class="line">                p[<span class="number">0</span>] = rho0*Rspecific[<span class="number">0</span>]*thermo.T()[<span class="number">0</span>];</span><br><span class="line">                rho[<span class="number">0</span>] = rho0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">------------------------------pEqn.H------------------------------------------       </span><br><span class="line"></span><br><span class="line">------------------------------output.H---------------------------------------- </span><br><span class="line">        <span class="comment">//#include "output.H"</span></span><br><span class="line">        runTime.<span class="built_in">write</span>();</span><br><span class="line">    </span><br><span class="line">        Info&lt;&lt; <span class="string">"Sh = "</span> &lt;&lt; Sh</span><br><span class="line">            &lt;&lt; <span class="string">", T = "</span> &lt;&lt; thermo.T()[<span class="number">0</span>]</span><br><span class="line">            &lt;&lt; <span class="string">", p = "</span> &lt;&lt; thermo.p()[<span class="number">0</span>]</span><br><span class="line">            &lt;&lt; <span class="string">", "</span> &lt;&lt; Y[<span class="number">0</span>].name() &lt;&lt; <span class="string">" = "</span> &lt;&lt; Y[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">            &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">        post&lt;&lt; runTime.value() &lt;&lt; token::TAB &lt;&lt; thermo.T()[<span class="number">0</span>] &lt;&lt; token::TAB</span><br><span class="line">            &lt;&lt; thermo.p()[<span class="number">0</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">------------------------------output.H----------------------------------------   </span><br><span class="line"></span><br><span class="line">        Info&lt;&lt; <span class="string">"ExecutionTime = "</span> &lt;&lt; runTime.elapsedCpuTime() &lt;&lt; <span class="string">" s"</span></span><br><span class="line">            &lt;&lt; <span class="string">"  ClockTime = "</span> &lt;&lt; runTime.elapsedClockTime() &lt;&lt; <span class="string">" s"</span></span><br><span class="line">            &lt;&lt; nl &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Info &lt;&lt; <span class="string">"Number of steps = "</span> &lt;&lt; runTime.timeIndex() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    Info &lt;&lt; <span class="string">"End"</span> &lt;&lt; nl &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ************************************************************************* //</span></span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/22/dynamic_cast%E8%BD%AC%E6%8D%A2/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/22/dynamic_cast%E8%BD%AC%E6%8D%A2/" class="post-title-link" itemprop="url">dynamic_cast转换</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-02-22 10:40:27 / Modified: 11:07:09" itemprop="dateCreated datePublished" datetime="2020-02-22T10:40:27+08:00">2020-02-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
-                    <span itemprop="name">C++相关</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>定义：沿着继承层次结构向上、向下和横向安全地将指针和引用转换为类。</li>
-<li>表达式：</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dynamic_cast</span> &lt; <span class="keyword">new</span>-type &gt; ( expression )</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>new-type必须是类的指针、引用或者void*</p>
-<p>如果type-id是类指针类型，那么expression也必须是一个指针，如果type-id是一个引用，那么expression也必须是一个引用。</p>
-<p>此处引用：<a href="https://blog.csdn.net/hongkangwl/article/details/21161713" target="_blank" rel="noopener">https://blog.csdn.net/hongkangwl/article/details/21161713</a></p>
-</blockquote>
-<ol>
-<li>如果强制转换<strong>成功</strong>，dynamic_cast将返回一个类型为<strong>新型</strong>的值。如果转换<strong>失败</strong>，并且new-type是<strong>指针类型</strong>，那么它将返回该类型的<strong>空指针</strong>。如果转换失败，<strong>并且</strong>new-type是<strong>引用类型</strong>，则抛出一个与<strong>std::bad_cast</strong>类型的处理程序匹配的异常。</li>
-<li>注意：<ul>
-<li>dynamic_cast在将父类cast到子类时，<strong>父类</strong>必须要有<strong>虚函数</strong>，否则编译器会报错。</li>
-<li>dynamic_cast主要用于类层次间的上行转换和下行转换，还可以用于类之间的交叉转换。</li>
-<li>在类层次间进行上行转换时，dynamic_cast和static_cast的效果是一样的；</li>
-<li>在进行<strong>下行</strong>转换时，dynamic_cast具有类型检查的功能，比static_cast更安全。<blockquote>
-<p>转载原文链接：<a href="https://blog.csdn.net/weixin_44212574/article/details/89043854" target="_blank" rel="noopener">https://blog.csdn.net/weixin_44212574/article/details/89043854</a></p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>例子</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 我是父类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tfather</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"father's f()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 我是子类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tson</span> :</span> <span class="keyword">public</span> Tfather</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"son's f()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">int</span> data; <span class="comment">// 我是子类独有成员</span></span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	Tfather father;</span><br><span class="line">	Tson son;</span><br><span class="line">	son.data = <span class="number">123</span>;</span><br><span class="line"> </span><br><span class="line">	Tfather *pf;</span><br><span class="line">	Tson *ps;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 上行转换：没有问题，多态有效 */</span></span><br><span class="line">	ps = &amp;son;</span><br><span class="line">	pf = <span class="keyword">dynamic_cast</span>&lt;Tfather *&gt;(ps);</span><br><span class="line">	pf-&gt;f();</span><br><span class="line"> </span><br><span class="line">	<span class="comment">/* 下行转换（pf实际指向子类对象）：没有问题 */</span></span><br><span class="line">	pf = &amp;son;</span><br><span class="line">	ps = <span class="keyword">dynamic_cast</span>&lt;Tson *&gt;(pf);</span><br><span class="line">	ps-&gt;f();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ps-&gt;data &lt;&lt; <span class="built_in">endl</span>;		<span class="comment">// 访问子类独有成员有效</span></span><br><span class="line"> </span><br><span class="line">	<span class="comment">/* 下行转换（pf实际指向父类对象）：含有不安全操作，dynamic_cast发挥作用返回NULL */</span></span><br><span class="line">	pf = &amp;father;</span><br><span class="line">	ps = <span class="keyword">dynamic_cast</span>&lt;Tson *&gt;(pf);</span><br><span class="line">	assert(ps != <span class="literal">NULL</span>);			 	<span class="comment">// 违背断言，阻止以下不安全操作</span></span><br><span class="line">	ps-&gt;f();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ps-&gt;data &lt;&lt; <span class="built_in">endl</span>;		<span class="comment">// 不安全操作，对象实例根本没有data成员</span></span><br><span class="line"> </span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/22/dynamic_cast%E8%BD%AC%E6%8D%A2/" rel="prev" title="dynamic_cast转换">
+      <i class="fa fa-chevron-left"></i> dynamic_cast转换
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/simpleControl_H/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/21/simpleControl_H/" class="post-title-link" itemprop="url">simpleControl.H</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-21 17:50:41" itemprop="dateCreated datePublished" datetime="2020-02-21T17:50:41+08:00">2020-02-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenFOAM-%E5%9F%BA%E7%A1%80%E5%A4%B4%E6%96%87%E4%BB%B6%E7%AF%87/" itemprop="url" rel="index">
-                    <span itemprop="name">OpenFOAM-基础头文件篇</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="代码意义解释"><a href="#代码意义解释" class="headerlink" title="代码意义解释"></a>代码意义解释</h1><h2 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h2><p>主要的函数为loop()函数，检查当前时间步是否满足收敛条件，如满足，返回迭代终止，否则存储当前时间步中场的数据</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/21/simpleControl_H/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/laplacianFoam/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/21/laplacianFoam/" class="post-title-link" itemprop="url">laplacianFoam</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-02-21 17:28:39 / Modified: 17:45:46" itemprop="dateCreated datePublished" datetime="2020-02-21T17:28:39+08:00">2020-02-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenFOAM-%E6%B1%82%E8%A7%A3%E5%99%A8%E7%AF%87/" itemprop="url" rel="index">
-                    <span itemprop="name">OpenFOAM-求解器篇</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><p>导热问题，常发生在固体加热，此时由于介质均一，热量的传递仅由热扩散作用决定，因而可忽略对流的影响。<br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/21/laplacianFoam/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/C++%20%E4%B8%AD%E7%9A%84%20mutable%20%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/21/C++%20%E4%B8%AD%E7%9A%84%20mutable%20%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/" class="post-title-link" itemprop="url">C++ 中的 mutable 关键字（转载）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-02-21 00:00:00 / Modified: 17:46:56" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
-                    <span itemprop="name">C++相关</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>转载自：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fliam.page%2F2017%2F05%2F25%2Fthe-mutable-keyword-in-Cxx%2F" target="_blank" rel="noopener">https://liam.page/2017/05/25/the-mutable-keyword-in-Cxx/</a><br>此篇介绍 C++ 中的 <code>mutable</code> 关键字。</p>
-</blockquote>
-<h2 id="类中的-mutable"><a href="#类中的-mutable" class="headerlink" title="类中的 mutable"></a>类中的 <code>mutable</code></h2><p><code>mutable</code> 从字面意思上来说，是「可变的」之意。</p>
-<p>若是要「顾名思义」，那么这个关键词的含义就有些意思了。显然，「可变的」只能用来形容变量，而不可能是「函数」或者「类」本身。然而，既然是「变量」，那么它本来就是可变的，也没有必要使用 <code>mutable</code> 来修饰。那么，<code>mutable</code> 就只能用来形容某种不变的东西了。</p>
-<p>C++ 中，不可变的变量，称之为常量，使用 <code>const</code> 来修饰。然而，若是 <code>const mutable</code> 联用，未免让人摸不着头脑——到底是可变还是不可变呢？</p>
-<p>事实上，<code>mutable</code> 是用来修饰一个 <code>const</code> 示例的部分可变的数据成员的。如果要说得更清晰一点，就是说 <code>mutable</code> 的出现，将 C++ 中的 <code>const</code> 的概念分成了两种。</p>
-<ul>
-<li>二进制层面的 <code>const</code>，也就是「绝对的」常量，在任何情况下都不可修改（除非用 <code>const_cast</code>）。</li>
-<li>引入 <code>mutable</code> 之后，C++ 可以有逻辑层面的 <code>const</code>，也就是对一个常量实例来说，从外部观察，它是常量而不可修改；但是内部可以有非常量的状态。</li>
-</ul>
-<blockquote>
-<p>当然，所谓的「逻辑 <code>const</code>」，在 C++ 标准中并没有这一称呼。这只是为了方便理解，而创造出来的名词。</p>
-</blockquote>
-<p>显而易见，<code>mutable</code> 只能用来修饰类的数据成员；而被 <code>mutable</code> 修饰的数据成员，可以在 <code>const</code> 成员函数中修改。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/21/C++%20%E4%B8%AD%E7%9A%84%20mutable%20%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/hexo+github%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/21/hexo+github%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">hexo+github创建基本教程</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-02-21 00:00:00 / Modified: 17:27:19" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/blog/" itemprop="url" rel="index">
-                    <span itemprop="name">blog</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="搭建个人博客"><a href="#搭建个人博客" class="headerlink" title="搭建个人博客"></a>搭建个人博客</h1><p>此处参考下列<strong>卡夫卡想忘了你</strong>的知乎文章搭建，文章链接如下</p>
-<blockquote>
-<p><a href="https://zhuanlan.zhihu.com/p/59517224" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/59517224</a></p>
-</blockquote>
-<h1 id="hexo常见指令"><a href="#hexo常见指令" class="headerlink" title="hexo常见指令"></a>hexo常见指令</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/21/hexo+github%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/next%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/21/next%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">next配置</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-02-21 00:00:00 / Modified: 17:32:04" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/blog/" itemprop="url" rel="index">
-                    <span itemprop="name">blog</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="配置公式"><a href="#配置公式" class="headerlink" title="配置公式"></a>配置公式</h1><p>教程如下（很详细）：<a href="https://www.jianshu.com/p/68e6f82d88b7" target="_blank" rel="noopener">https://www.jianshu.com/p/68e6f82d88b7</a></p>
-<blockquote>
-<p>最后一步，在调用mathjax时，如果我直接在文章开头添加：mathjax: true时，无法正确生成公式</p>
-<p>修改方法：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>圈住的部分，称为文章的<strong>front-matter</strong><br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/21/next%E9%85%8D%E7%BD%AE/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/%E5%AF%B9%E8%B1%A1%E6%B3%A8%E5%86%8C%E6%9C%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/21/%E5%AF%B9%E8%B1%A1%E6%B3%A8%E5%86%8C%E6%9C%BA/" class="post-title-link" itemprop="url">对象注册机</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-02-21 00:00:00 / Modified: 17:46:15" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenFOAM-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%AF%87/" itemprop="url" rel="index">
-                    <span itemprop="name">OpenFOAM-基础知识篇</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文主要介绍了对象注册机的各参数类型及使用范例<br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/21/%E5%AF%B9%E8%B1%A1%E6%B3%A8%E5%86%8C%E6%9C%BA/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -872,6 +304,7 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求解策略"><span class="nav-number">1.2.</span> <span class="nav-text">求解策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">1.3.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#待解决"><span class="nav-number">1.4.</span> <span class="nav-text">待解决</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码详读"><span class="nav-number">2.</span> <span class="nav-text">代码详读</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
