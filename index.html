@@ -77,7 +77,7 @@
   <div class="container use-motion">
     <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+       <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
@@ -137,6 +137,143 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/04/potentialFoam/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一只想要飞的很高很高的笨鸟">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/04/potentialFoam/" class="post-title-link" itemprop="url">potentialFoam</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-03-04 20:01:59 / Modified: 20:01:26" itemprop="dateCreated datePublished" datetime="2020-03-04T20:01:59+08:00">2020-03-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h1><ol>
+<li>基本概念：<strong>势流</strong>描述了速度场是一个标量函数的梯度，它称为<strong>速度势</strong>，势流常表征为无旋流动。</li>
+<li>在<strong>不可压缩流动</strong>中，势流速度遵循拉普拉斯方程</li>
+<li>应用范围：机翼的外部流场、水波、电渗流和地下水流动。对于强涡度效应的流动(或其部分)，势流近似是不适用的。</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/04/potentialFoam/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/25/123/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一只想要飞的很高很高的笨鸟">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/25/123/" class="post-title-link" itemprop="url">123</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-02-25 19:09:35 / Modified: 20:32:27" itemprop="dateCreated datePublished" datetime="2020-02-25T19:09:35+08:00">2020-02-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>categories: OpenFOAM-基础篇<br>mathjax: true</p>
+<p>原文链接：[OpenFOAM中divDevRhoReff和divDevReff具体是啥][<a href="https://blog.csdn.net/dsfsdffgfd/article/details/82117119" target="_blank" rel="noopener">https://blog.csdn.net/dsfsdffgfd/article/details/82117119</a>]</p>
+<p>先看动量方程</p>
+<script type="math/tex; mode=display">
+\frac{\partial \rho \mathbf{U}}{\partial t}+\nabla \cdot \left( \rho \mathbf{UU} \right)=\nabla \cdot \sigma +\mathbf{f} \tag{1}</script><p>其中应力张量：</p>
+<script type="math/tex; mode=display">
+\sigma =-\left( p+\frac{2}{3}\mu \nabla \cdot \mathbf{U} \right)\mathbf{I}+\mu[\nabla \mathbf U+(\nabla \mathbf U)^T]\\
+=-p\mathbf I-\frac 2 3\mu \nabla \cdot \mathbf U\mathbf I+\mu\nabla \mathbf U+\mu(\nabla \mathbf U)^T \tag{2}</script><p>将公式(2)带入(1)可得：</p>
+<script type="math/tex; mode=display">
+\frac{\partial \rho \mathbf{U}}{\partial t}+\nabla \cdot \left( \rho \mathbf{UU} \right)=\nabla\cdot[-p\mathbf I-\frac 2 3\mu \nabla \cdot \mathbf U\mathbf I+\mu\nabla \mathbf U+\mu(\nabla \mathbf U)^T]+\mathbf f \tag{3}</script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -249,6 +386,13 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
 
               <time title="Created: 2020-02-22 12:58:19" itemprop="dateCreated datePublished" datetime="2020-02-22T12:58:19+08:00">2020-02-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-23 15:51:15" itemprop="dateModified" datetime="2020-02-23T15:51:15+08:00">2020-02-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -456,6 +600,91 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/C++%20%E4%B8%AD%E7%9A%84%20mutable%20%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一只想要飞的很高很高的笨鸟">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/21/C++%20%E4%B8%AD%E7%9A%84%20mutable%20%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/" class="post-title-link" itemprop="url">C++ 中的 mutable 关键字（转载）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-21 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-23 15:49:31" itemprop="dateModified" datetime="2020-02-23T15:49:31+08:00">2020-02-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
+                    <span itemprop="name">C++相关</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>转载自：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fliam.page%2F2017%2F05%2F25%2Fthe-mutable-keyword-in-Cxx%2F" target="_blank" rel="noopener">C++ 中的 mutable 关键字</a><br>此篇介绍 C++ 中的 <code>mutable</code> 关键字。</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/21/C++%20%E4%B8%AD%E7%9A%84%20mutable%20%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/hexo+github%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -479,10 +708,16 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-02-21 00:00:00 / Modified: 17:27:19" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
+              <time title="Created: 2020-02-21 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-23 15:57:03" itemprop="dateModified" datetime="2020-02-23T15:57:03+08:00">2020-02-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -508,7 +743,7 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
       
           <h1 id="搭建个人博客"><a href="#搭建个人博客" class="headerlink" title="搭建个人博客"></a>搭建个人博客</h1><p>此处参考下列<strong>卡夫卡想忘了你</strong>的知乎文章搭建，文章链接如下</p>
 <blockquote>
-<p><a href="https://zhuanlan.zhihu.com/p/59517224" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/59517224</a></p>
+<p>[手把手教你怎么用 Hexo + GitHub Pages 搭建 Blog][<a href="https://zhuanlan.zhihu.com/p/59517224" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/59517224</a>]</p>
 </blockquote>
 <h1 id="hexo常见指令"><a href="#hexo常见指令" class="headerlink" title="hexo常见指令"></a>hexo常见指令</h1>
           <!--noindex-->
@@ -537,7 +772,7 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/C++%20%E4%B8%AD%E7%9A%84%20mutable%20%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/next%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -551,7 +786,7 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/21/C++%20%E4%B8%AD%E7%9A%84%20mutable%20%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/" class="post-title-link" itemprop="url">C++ 中的 mutable 关键字（转载）</a>
+            <a href="/2020/02/21/next%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">next配置</a>
         </h1>
 
         <div class="post-meta">
@@ -560,18 +795,24 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-02-21 00:00:00 / Modified: 17:46:56" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
+              <time title="Created: 2020-02-21 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-23 16:11:06" itemprop="dateModified" datetime="2020-02-23T16:11:06+08:00">2020-02-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
-                    <span itemprop="name">C++相关</span>
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
                   </a>
                 </span>
             </span>
@@ -587,24 +828,18 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>转载自：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fliam.page%2F2017%2F05%2F25%2Fthe-mutable-keyword-in-Cxx%2F" target="_blank" rel="noopener">https://liam.page/2017/05/25/the-mutable-keyword-in-Cxx/</a><br>此篇介绍 C++ 中的 <code>mutable</code> 关键字。</p>
-</blockquote>
-<h2 id="类中的-mutable"><a href="#类中的-mutable" class="headerlink" title="类中的 mutable"></a>类中的 <code>mutable</code></h2><p><code>mutable</code> 从字面意思上来说，是「可变的」之意。</p>
-<p>若是要「顾名思义」，那么这个关键词的含义就有些意思了。显然，「可变的」只能用来形容变量，而不可能是「函数」或者「类」本身。然而，既然是「变量」，那么它本来就是可变的，也没有必要使用 <code>mutable</code> 来修饰。那么，<code>mutable</code> 就只能用来形容某种不变的东西了。</p>
-<p>C++ 中，不可变的变量，称之为常量，使用 <code>const</code> 来修饰。然而，若是 <code>const mutable</code> 联用，未免让人摸不着头脑——到底是可变还是不可变呢？</p>
-<p>事实上，<code>mutable</code> 是用来修饰一个 <code>const</code> 示例的部分可变的数据成员的。如果要说得更清晰一点，就是说 <code>mutable</code> 的出现，将 C++ 中的 <code>const</code> 的概念分成了两种。</p>
-<ul>
-<li>二进制层面的 <code>const</code>，也就是「绝对的」常量，在任何情况下都不可修改（除非用 <code>const_cast</code>）。</li>
-<li>引入 <code>mutable</code> 之后，C++ 可以有逻辑层面的 <code>const</code>，也就是对一个常量实例来说，从外部观察，它是常量而不可修改；但是内部可以有非常量的状态。</li>
-</ul>
+          <h1 id="配置公式"><a href="#配置公式" class="headerlink" title="配置公式"></a>配置公式</h1><p>教程如下（很详细）:</p>
+<p>[here][<a href="https://www.jianshu.com/p/68e6f82d88b7" target="_blank" rel="noopener">https://www.jianshu.com/p/68e6f82d88b7</a>]</p>
 <blockquote>
-<p>当然，所谓的「逻辑 <code>const</code>」，在 C++ 标准中并没有这一称呼。这只是为了方便理解，而创造出来的名词。</p>
+<p>最后一步，在调用mathjax时，如果我直接在文章开头添加：mathjax: true时，无法正确生成公式</p>
+<p>修改方法：</p>
 </blockquote>
-<p>显而易见，<code>mutable</code> 只能用来修饰类的数据成员；而被 <code>mutable</code> 修饰的数据成员，可以在 <code>const</code> 成员函数中修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>圈住的部分，称为文章的<strong>front-matter</strong><br>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/02/21/C++%20%E4%B8%AD%E7%9A%84%20mutable%20%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/#more" rel="contents">
+              <a class="btn" href="/2020/02/21/next%E9%85%8D%E7%BD%AE/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -701,90 +936,6 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/next%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一只想要飞的很高很高的笨鸟">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/21/next%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">next配置</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-02-21 00:00:00 / Modified: 17:32:04" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/blog/" itemprop="url" rel="index">
-                    <span itemprop="name">blog</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="配置公式"><a href="#配置公式" class="headerlink" title="配置公式"></a>配置公式</h1><p>教程如下（很详细）：<a href="https://www.jianshu.com/p/68e6f82d88b7" target="_blank" rel="noopener">https://www.jianshu.com/p/68e6f82d88b7</a></p>
-<blockquote>
-<p>最后一步，在调用mathjax时，如果我直接在文章开头添加：mathjax: true时，无法正确生成公式</p>
-<p>修改方法：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>圈住的部分，称为文章的<strong>front-matter</strong><br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/21/next%E9%85%8D%E7%BD%AE/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -851,7 +1002,7 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -909,6 +1060,8 @@ p = \sum p _ { i } = \sum n _ { i } \frac { R T } { V } = \sum \frac { m _ { i }
   </div>
 
   
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="true"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="基本介绍 基本概念：势流描述了速度场是一个标量函数的梯度，它称为速度势，势流常表征为无旋流动。 在不可压缩流动中，势流速度遵循拉普拉斯方程 应用范围：机翼的外部流场、水波、电渗流和地下水流动。对于强涡度效应的流动(或其部分)，势流近似是不适用的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="potentialFoam">
+<meta property="og:url" content="http://yoursite.com/2020/03/04/potentialFoam/index.html">
+<meta property="og:site_name" content="一只想要飞的很高很高的笨鸟">
+<meta property="og:description" content="基本介绍 基本概念：势流描述了速度场是一个标量函数的梯度，它称为速度势，势流常表征为无旋流动。 在不可压缩流动中，势流速度遵循拉普拉斯方程 应用范围：机翼的外部流场、水波、电渗流和地下水流动。对于强涡度效应的流动(或其部分)，势流近似是不适用的。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-04T12:01:59.382Z">
+<meta property="article:modified_time" content="2020-03-04T12:01:26.340Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/04/potentialFoam/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>potentialFoam | 一只想要飞的很高很高的笨鸟</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+       <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一只想要飞的很高很高的笨鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/04/potentialFoam/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一只想要飞的很高很高的笨鸟">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          potentialFoam
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-03-04 20:01:59 / Modified: 20:01:26" itemprop="dateCreated datePublished" datetime="2020-03-04T20:01:59+08:00">2020-03-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h1><ol>
+<li>基本概念：<strong>势流</strong>描述了速度场是一个标量函数的梯度，它称为<strong>速度势</strong>，势流常表征为无旋流动。</li>
+<li>在<strong>不可压缩流动</strong>中，势流速度遵循拉普拉斯方程</li>
+<li>应用范围：机翼的外部流场、水波、电渗流和地下水流动。对于强涡度效应的流动(或其部分)，势流近似是不适用的。</li>
+</ol>
+<a id="more"></a>
+<h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><script type="math/tex; mode=display">
+\mathbf v=\nabla \varphi\tag{1}</script><p>由定义知梯度的旋度为0</p>
+<blockquote>
+<p>东岳流体，张量公式（18）</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\nabla\times\mathbf v=\nabla\times\nabla\varphi=0\tag{2}</script><h2 id="不可压缩流"><a href="#不可压缩流" class="headerlink" title="不可压缩流"></a>不可压缩流</h2><p>在不可压缩流动中，速度的散度为0，即</p>
+<script type="math/tex; mode=display">
+\nabla\cdot \mathbf v=0\tag{3}</script><p>代入(1)得</p>
+<script type="math/tex; mode=display">
+\nabla^2\varphi=0\tag{4}</script><p>$\nabla^2=\nabla\cdot\nabla=\Delta$：称为<strong>拉普朗普算子</strong></p>
+<h2 id="二维流动分析"><a href="#二维流动分析" class="headerlink" title="二维流动分析"></a>二维流动分析</h2><p>令$z=x+iy$和$w=\varphi+i\psi$</p>
+<p>我们定义<strong>投影f</strong></p>
+<script type="math/tex; mode=display">
+f(x+iy)=\varphi+i\psi\quad or \quad f(z)=w\tag{5}</script><p>（5）满足<strong><a href="https://en.wikipedia.org/wiki/Cauchy–Riemann_equations" target="_blank" rel="noopener">Cauchy–Riemann equations</a></strong></p>
+<script type="math/tex; mode=display">
+\frac{\partial \varphi}{\partial x}=\frac{\partial \psi}{\partial y},\quad \frac{\partial \varphi}{\partial y}=-\frac{\partial \psi}{\partial x}\tag{6}</script><script type="math/tex; mode=display">
+\frac{df}{dz}=u-iv</script><script type="math/tex; mode=display">
+u=\frac{\partial \varphi}{\partial x}=\frac{\partial \psi}{\partial y},\quad v=\frac{\partial \varphi}{\partial y}=-\frac{\partial \psi}{\partial x}\tag{7}</script><p>$\varphi$和$\psi$满足拉普拉斯方程</p>
+<script type="math/tex; mode=display">
+\Delta \varphi=\frac{\partial^2\varphi}{\partial x^2}+\frac{\partial^2\varphi}{\partial y^2}=0\tag{8}</script><script type="math/tex; mode=display">
+\Delta \psi=\frac{\partial^2\psi}{\partial x^2}+\frac{\partial^2\psi}{\partial y^2}=0\tag{9}</script><p>又</p>
+<script type="math/tex; mode=display">
+\nabla \varphi\cdot \nabla \psi=\frac{\partial \varphi}{\partial x}\frac{\partial \psi}{\partial x}+\frac{\partial \varphi}{\partial y}\frac{\partial\psi}{\partial y}=\frac{\partial \psi}{\partial y}\frac{\partial \psi}{\partial x}-\frac{\partial \psi}{\partial x}\frac{\partial\psi}{\partial y}=0\tag{10}</script><p>由此可知当势函数线与流函数线<strong>相垂直</strong></p>
+<h2 id="求解过程（参考东岳流体分析）"><a href="#求解过程（参考东岳流体分析）" class="headerlink" title="求解过程（参考东岳流体分析）"></a>求解过程（参考东岳流体分析）</h2><p>定义速度势函数为：</p>
+<script type="math/tex; mode=display">
+-\nabla\varphi=\mathbf U\tag{11}</script><blockquote>
+<p>如此定义可保证速度势和压力的作用同向</p>
+</blockquote>
+<p>速度势满足的方程为（4），将求解方程演变为</p>
+<script type="math/tex; mode=display">
+\nabla \cdot (\nabla P)=-\nabla \cdot \mathbf U\tag{12}</script><p>同时定义通量场</p>
+<script type="math/tex; mode=display">
+\phi=\mathbf U_f\cdot \mathbf S_f\tag{13}</script><p>并将其内部场初始化为0，同时通过$\mathbf U$给定$\mathbf \phi$的边界条件。这种方法可以将边界条件的影响通过源项来植入方程(12)。因为在方程离散的过程中，边界条件控制也是通过进入方程的源项影响待求变量的结果。</p>
+<p>对于动量方程，假设稳态，忽略扩散项</p>
+<script type="math/tex; mode=display">
+\nabla\cdot\mathbf U=-\nabla \frac{p}\rho\tag{14}</script><h1 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h1><h2 id="代码知识点"><a href="#代码知识点" class="headerlink" title="代码知识点"></a>代码知识点</h2><ol>
+<li><strong>addOption</strong>, <strong>addBoolOption</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//- Add to an option to validOptions with usage information</span></span><br><span class="line"><span class="comment">//  An option with an empty param is a bool option</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> addOption</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">word</span>&amp; opt,</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">string</span>&amp; param = <span class="string">""</span>,</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">string</span>&amp; usage = <span class="string">""</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">//- Add to a bool option to validOptions with usage information</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> addBoolOption</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">word</span>&amp; opt,</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">string</span>&amp; usage = <span class="string">""</span></span><br><span class="line">)</span><br><span class="line">&#123;</span><br><span class="line">    addOption(opt, <span class="string">""</span>, usage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>$\phi$<br>//可以将体积场转化为表面场（运用fvc::interpolate())<br>//或者由表面场转化为体积场（运用fvc::reconstruct())进行计算。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*---------------------------------------------------------------------------*\</span></span><br><span class="line"><span class="comment">  =========                 |</span></span><br><span class="line"><span class="comment">  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox</span></span><br><span class="line"><span class="comment">   \\    /   O peration     |</span></span><br><span class="line"><span class="comment">    \\  /    A nd           | Copyright (C) 2011-2015 OpenFOAM Foundation</span></span><br><span class="line"><span class="comment">     \\/     M anipulation  |</span></span><br><span class="line"><span class="comment">-------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">License</span></span><br><span class="line"><span class="comment">    This file is part of OpenFOAM.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    OpenFOAM is free software: you can redistribute it and/or modify it</span></span><br><span class="line"><span class="comment">    under the terms of the GNU General Public License as published by</span></span><br><span class="line"><span class="comment">    the Free Software Foundation, either version 3 of the License, or</span></span><br><span class="line"><span class="comment">    (at your option) any later version.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    OpenFOAM is distributed in the hope that it will be useful, but WITHOUT</span></span><br><span class="line"><span class="comment">    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span></span><br><span class="line"><span class="comment">    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span></span><br><span class="line"><span class="comment">    for more details.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    You should have received a copy of the GNU General Public License</span></span><br><span class="line"><span class="comment">    along with OpenFOAM.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Application</span></span><br><span class="line"><span class="comment">    potentialFoam</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Description</span></span><br><span class="line"><span class="comment">    Potential flow solver which solves for the velocity potential</span></span><br><span class="line"><span class="comment">    from which the flux-field is obtained and velocity field by reconstructing</span></span><br><span class="line"><span class="comment">    the flux.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    This application is particularly useful to generate starting fields for</span></span><br><span class="line"><span class="comment">    Navier-Stokes codes.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">\*---------------------------------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"fvCFD.H"</span>				<span class="comment">//有限体积法头文件</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"fvIOoptionList.H"</span>		<span class="comment">//IOoptionList</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//增加新的有效输入参数。</span></span><br><span class="line">    argList::addOption</span><br><span class="line">    (</span><br><span class="line">        <span class="string">"pName"</span>,</span><br><span class="line">        <span class="string">"pName"</span>,</span><br><span class="line">        <span class="string">"Name of the pressure field"</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    argList::addBoolOption</span><br><span class="line">    (</span><br><span class="line">        <span class="string">"initialiseUBCs"</span>,</span><br><span class="line">        <span class="string">"Initialise U boundary conditions"</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    argList::addBoolOption</span><br><span class="line">    (</span><br><span class="line">        <span class="string">"writePhi"</span>,</span><br><span class="line">        <span class="string">"Write the velocity potential field"</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    argList::addBoolOption</span><br><span class="line">    (</span><br><span class="line">        <span class="string">"writep"</span>,</span><br><span class="line">        <span class="string">"Calculate and write the pressure field"</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    argList::addBoolOption</span><br><span class="line">    (</span><br><span class="line">        <span class="string">"withFunctionObjects"</span>,</span><br><span class="line">        <span class="string">"execute functionObjects"</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"setRootCase.H"</span></span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"createTime.H"</span></span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"createMesh.H"</span></span></span><br><span class="line">    <span class="comment">//#include "readControls.H"</span></span><br><span class="line">    <span class="keyword">const</span> dictionary&amp; potentialFlow =</span><br><span class="line">        mesh.solutionDict().subDict(<span class="string">"potentialFlow"</span>);	</span><br><span class="line">    <span class="comment">//寻找fvSolution中的potentialFlow关键字部分并设为字典</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> nNonOrthCorr =</span><br><span class="line">        potentialFlow.lookupOrDefault&lt;<span class="keyword">int</span>&gt;(<span class="string">"nNonOrthogonalCorrectors"</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">//读取potentialFlow中的非正交修正的值，如没有，默认为0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//#include "createFields.H"</span></span><br><span class="line">    Info&lt;&lt; <span class="string">"Reading velocity field U\n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    volVectorField U</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"U"</span>,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            mesh,</span><br><span class="line">            IOobject::MUST_READ,</span><br><span class="line">            IOobject::AUTO_WRITE</span><br><span class="line">        ),</span><br><span class="line">        mesh</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    U = dimensionedVector(<span class="string">"0"</span>, U.dimensions(), <span class="built_in">vector</span>::zero);</span><br><span class="line">    <span class="comment">//Construct given a name, a value and its dimensionSet.</span></span><br><span class="line">    <span class="comment">//dimensioned(const word&amp;, const dimensionSet&amp;, const Type);</span></span><br><span class="line">    <span class="comment">//初始化速度场。这里初始化速度为0 ，如果初始化Ux=1，Uy=2，Uz=3 （单位为国际单位）可采用 </span></span><br><span class="line">	<span class="comment">//U = dimensionedVector("0", U.dimensions(), vector(1,2,3));</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//表面场，phi，界面流率，存储在体之间的交接面上。表面场(surface...)不能和体积场(vol...)</span></span><br><span class="line">	<span class="comment">//直接计算，因为他们存储在不同地方，大小不同。</span></span><br><span class="line">	<span class="comment">//可以将体积场转化为表面场（运用fvc::interpolate())</span></span><br><span class="line">	<span class="comment">//或者由表面场转化为体积场（运用fvc::reconstruct())进行计算。</span></span><br><span class="line">    surfaceScalarField phi</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"phi"</span>,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            mesh,</span><br><span class="line">            IOobject::NO_READ,</span><br><span class="line">            IOobject::AUTO_WRITE</span><br><span class="line">        ),</span><br><span class="line">        fvc::interpolate(U) &amp; mesh.Sf()</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (args.optionFound(<span class="string">"initialiseUBCs"</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        U.correctBoundaryConditions();</span><br><span class="line">        phi = fvc::interpolate(U) &amp; mesh.Sf();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Default name for the pressure field</span></span><br><span class="line">    <span class="function"><span class="keyword">word</span> <span class="title">pName</span><span class="params">(<span class="string">"p"</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update name of the pressure field from the command-line option</span></span><br><span class="line">    args.optionReadIfPresent(<span class="string">"pName"</span>, pName);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Infer the pressure BCs from the velocity BCs</span></span><br><span class="line">    wordList pBCTypes</span><br><span class="line">    (</span><br><span class="line">        U.boundaryField().<span class="built_in">size</span>(),</span><br><span class="line">        fixedValueFvPatchScalarField::typeName</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    forAll(U.boundaryField(), patchi)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (U.boundaryField()[patchi].fixesValue())</span><br><span class="line">        &#123;</span><br><span class="line">            pBCTypes[patchi] = zeroGradientFvPatchScalarField::typeName;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; <span class="string">"Constructing pressure field "</span> &lt;&lt; pName &lt;&lt; nl &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    volScalarField p</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            pName,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            mesh,</span><br><span class="line">            IOobject::READ_IF_PRESENT,</span><br><span class="line">            IOobject::NO_WRITE</span><br><span class="line">        ),</span><br><span class="line">        mesh,</span><br><span class="line">        dimensionedScalar(pName, sqr(dimVelocity), <span class="number">0</span>),	<span class="comment">//m^2/s^-2</span></span><br><span class="line">        <span class="comment">//对于不可压缩里面的压力通常为p/rho</span></span><br><span class="line">        pBCTypes</span><br><span class="line">    );</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">template&lt;class Type, template&lt;class&gt; class PatchField, class GeoMesh&gt;</span></span><br><span class="line"><span class="comment">Foam::GeometricField&lt;Type, PatchField, GeoMesh&gt;::GeometricField</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">    const IOobject&amp; io,</span></span><br><span class="line"><span class="comment">    const Mesh&amp; mesh,</span></span><br><span class="line"><span class="comment">    const dimensionSet&amp; ds,</span></span><br><span class="line"><span class="comment">    const word&amp; patchFieldType</span></span><br><span class="line"><span class="comment">)</span></span><br><span class="line"><span class="comment">:</span></span><br><span class="line"><span class="comment">    DimensionedField&lt;Type, GeoMesh&gt;(io, mesh, ds, false),</span></span><br><span class="line"><span class="comment">    timeIndex_(this-&gt;time().timeIndex()),</span></span><br><span class="line"><span class="comment">    field0Ptr_(NULL),</span></span><br><span class="line"><span class="comment">    fieldPrevIterPtr_(NULL),</span></span><br><span class="line"><span class="comment">    boundaryField_(mesh.boundary(), *this, patchFieldType)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">    if (debug)</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        Info&lt;&lt; "GeometricField&lt;Type, PatchField, GeoMesh&gt;::GeometricField : "</span></span><br><span class="line"><span class="comment">               "creating temporary"</span></span><br><span class="line"><span class="comment">            &lt;&lt; endl &lt;&lt; this-&gt;info() &lt;&lt; endl;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    readIfPresent();</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span>            </span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; <span class="string">"Constructing velocity potential field Phi\n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    volScalarField Phi</span><br><span class="line">    (</span><br><span class="line">        IOobject</span><br><span class="line">        (</span><br><span class="line">            <span class="string">"Phi"</span>,</span><br><span class="line">            runTime.timeName(),</span><br><span class="line">            mesh,</span><br><span class="line">            IOobject::READ_IF_PRESENT,</span><br><span class="line">            IOobject::NO_WRITE</span><br><span class="line">        ),</span><br><span class="line">        mesh,</span><br><span class="line">        dimensionedScalar(<span class="string">"Phi"</span>, dimLength*dimVelocity, <span class="number">0</span>),	<span class="comment">//m^2*s^-1</span></span><br><span class="line">        p.boundaryField().types()</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    label PhiRefCell = <span class="number">0</span>;</span><br><span class="line">    scalar PhiRefValue = <span class="number">0</span>;</span><br><span class="line">     <span class="comment">//只有求解区域所有的压力边界都为第二类边界条件时，上面的值才会用到。如果有第一类边界条件，</span></span><br><span class="line">	<span class="comment">//压力参考值为这点边界值。对于不可压缩流动压力值为相对值，上面的参考值的大小对结果无影响。</span></span><br><span class="line">    setRefCell</span><br><span class="line">    (</span><br><span class="line">        Phi,</span><br><span class="line">        potentialFlow,</span><br><span class="line">        PhiRefCell,</span><br><span class="line">        PhiRefValue</span><br><span class="line">    );</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">//- If the field needs referencing find the reference cell nearest</span></span><br><span class="line"><span class="comment">//  (in index) to the given cell looked-up for field, but which is not on a</span></span><br><span class="line"><span class="comment">//  cyclic, symmetry or processor patch.</span></span><br><span class="line"><span class="comment">void setRefCell</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">    const volScalarField&amp; field,</span></span><br><span class="line"><span class="comment">    const dictionary&amp; dict,</span></span><br><span class="line"><span class="comment">    label&amp; refCelli,</span></span><br><span class="line"><span class="comment">    scalar&amp; refValue,</span></span><br><span class="line"><span class="comment">    const bool forceReference = false</span></span><br><span class="line"><span class="comment">);</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//#include "createFvOptions.H"</span></span><br><span class="line">    <span class="function">fv::IOoptionList <span class="title">fvOptions</span><span class="params">(mesh)</span></span>;    </span><br><span class="line"></span><br><span class="line">    <span class="comment">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span></span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; nl &lt;&lt; <span class="string">"Calculating potential flow"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Since solver contains no time loop it would never execute</span></span><br><span class="line">    <span class="comment">// function objects so do it ourselves</span></span><br><span class="line">    runTime.functionObjects().start();</span><br><span class="line"></span><br><span class="line">    fvOptions.makeRelative(phi);</span><br><span class="line"></span><br><span class="line">    adjustPhi(phi, U, p);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Non-orthogonal velocity potential corrector loop</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> nonOrth=<span class="number">0</span>; nonOrth&lt;=nNonOrthCorr; nonOrth++)</span><br><span class="line">    &#123;</span><br><span class="line">        fvScalarMatrix PhiEqn</span><br><span class="line">        (</span><br><span class="line">            fvm::laplacian(dimensionedScalar(<span class="string">"1"</span>, dimless, <span class="number">1</span>), Phi)</span><br><span class="line">         ==</span><br><span class="line">            fvc::div(phi)<span class="comment">//速度离散，显示。因为是压力方程，其他变量只能显示</span></span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        PhiEqn.setReference(PhiRefCell, PhiRefValue);</span><br><span class="line">        <span class="comment">//设置压力参考值</span></span><br><span class="line">        PhiEqn.solve();</span><br><span class="line">        <span class="comment">//求解压力方程，调用的fvMatrix成员函数</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nonOrth == nNonOrthCorr)</span><br><span class="line">        &#123;</span><br><span class="line">            phi -= PhiEqn.flux();	<span class="comment">//流量修正</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fvOptions.makeAbsolute(phi);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//提示连续性方程求解误差</span></span><br><span class="line">    Info&lt;&lt; <span class="string">"Continuity error = "</span></span><br><span class="line">        &lt;&lt; mag(fvc::div(phi))().weightedAverage(mesh.V()).value()</span><br><span class="line">        &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//根据表面场重建速度场</span></span><br><span class="line">    U = fvc::reconstruct(phi);</span><br><span class="line">    <span class="comment">//对速度场边界进行修正，主要针对第二类边界条件下的边界场</span></span><br><span class="line">    U.correctBoundaryConditions();</span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; <span class="string">"Interpolated velocity error = "</span></span><br><span class="line">        &lt;&lt; (<span class="built_in">sqrt</span>(sum(sqr((fvc::interpolate(U) &amp; mesh.Sf()) - phi)))</span><br><span class="line">          /sum(mesh.magSf())).value()</span><br><span class="line">        &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Write U and phi</span></span><br><span class="line">    U.<span class="built_in">write</span>();</span><br><span class="line">    phi.<span class="built_in">write</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Optionally write Phi</span></span><br><span class="line">    <span class="keyword">if</span> (args.optionFound(<span class="string">"writePhi"</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        Phi.<span class="built_in">write</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Calculate the pressure field</span></span><br><span class="line">    <span class="keyword">if</span> (args.optionFound(<span class="string">"writep"</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        Info&lt;&lt; nl &lt;&lt; <span class="string">"Calculating approximate pressure field"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">        label pRefCell = <span class="number">0</span>;</span><br><span class="line">        scalar pRefValue = <span class="number">0.0</span>;</span><br><span class="line">        setRefCell</span><br><span class="line">        (</span><br><span class="line">            p,</span><br><span class="line">            potentialFlow,</span><br><span class="line">            pRefCell,</span><br><span class="line">            pRefValue</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Calculate the flow-direction filter tensor</span></span><br><span class="line">        <span class="function">volScalarField <span class="title">magSqrU</span><span class="params">(magSqr(U))</span></span>;	<span class="comment">//U*U</span></span><br><span class="line">        <span class="function">volSymmTensorField <span class="title">F</span><span class="params">(sqr(U)/(magSqrU + SMALL*average(magSqrU)))</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Calculate the divergence of the flow-direction filtered div(U*U)</span></span><br><span class="line">        <span class="comment">// Filtering with the flow-direction generates a more reasonable</span></span><br><span class="line">        <span class="comment">// pressure distribution in regions of high velocity gradient in the</span></span><br><span class="line">        <span class="comment">// direction of the flow</span></span><br><span class="line">        volScalarField divDivUU</span><br><span class="line">        (</span><br><span class="line">            fvc::div</span><br><span class="line">            (</span><br><span class="line">                F &amp; fvc::div(phi, U),</span><br><span class="line">                <span class="string">"div(div(phi,U))"</span></span><br><span class="line">            )</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Solve a Poisson equation for the approximate pressure</span></span><br><span class="line">        <span class="comment">//由于divDicUU是其他变量，所以为fvc显式</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> nonOrth=<span class="number">0</span>; nonOrth&lt;=nNonOrthCorr; nonOrth++)</span><br><span class="line">        &#123;</span><br><span class="line">            fvScalarMatrix pEqn</span><br><span class="line">            (</span><br><span class="line">                fvm::laplacian(p) + divDivUU</span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">            pEqn.setReference(pRefCell, pRefValue);</span><br><span class="line">            pEqn.solve();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        p.<span class="built_in">write</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    runTime.functionObjects().<span class="built_in">end</span>();</span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; <span class="string">"ExecutionTime = "</span> &lt;&lt; runTime.elapsedCpuTime() &lt;&lt; <span class="string">" s"</span></span><br><span class="line">        &lt;&lt; <span class="string">"  ClockTime = "</span> &lt;&lt; runTime.elapsedClockTime() &lt;&lt; <span class="string">" s"</span></span><br><span class="line">        &lt;&lt; nl &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    Info&lt;&lt; <span class="string">"End\n"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ************************************************************************* //</span></span><br></pre></td></tr></table></figure>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<li><a href="http://blog.sina.com.cn/s/blog_5fdfa7e60100d5ic.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_5fdfa7e60100d5ic.html</a></li>
+<li><a href="http://dyfluid.com/potentialFoam.html" target="_blank" rel="noopener">http://dyfluid.com/potentialFoam.html</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Potential_flow" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Potential_flow</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/25/123/" rel="prev" title="123">
+      <i class="fa fa-chevron-left"></i> 123
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#描述"><span class="nav-number">2.</span> <span class="nav-text">描述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不可压缩流"><span class="nav-number">2.1.</span> <span class="nav-text">不可压缩流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维流动分析"><span class="nav-number">2.2.</span> <span class="nav-text">二维流动分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求解过程（参考东岳流体分析）"><span class="nav-number">2.3.</span> <span class="nav-text">求解过程（参考东岳流体分析）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码分析"><span class="nav-number">3.</span> <span class="nav-text">代码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码知识点"><span class="nav-number">3.1.</span> <span class="nav-text">代码知识点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="true"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
