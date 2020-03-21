@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="备注：本文主体内容为https:&#x2F;&#x2F;krasjet.github.io&#x2F;quaternion&#x2F;quaternion.pdf的归纳，如有侵权，请联系本人删除。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="四元数学习">
+<meta property="og:url" content="http://yoursite.com/2020/03/21/%E5%9B%9B%E5%85%83%E6%95%B0/index.html">
+<meta property="og:site_name" content="一只想要飞的很高很高的笨鸟">
+<meta property="og:description" content="备注：本文主体内容为https:&#x2F;&#x2F;krasjet.github.io&#x2F;quaternion&#x2F;quaternion.pdf的归纳，如有侵权，请联系本人删除。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/03/21/%E5%9B%9B%E5%85%83%E6%95%B0/image-20200321072258479.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/21/%E5%9B%9B%E5%85%83%E6%95%B0/image-20200321073316195.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/21/%E5%9B%9B%E5%85%83%E6%95%B0/image-20200321085015563.png">
+<meta property="article:published_time" content="2020-03-21T03:03:23.305Z">
+<meta property="article:modified_time" content="2020-03-21T03:07:08.879Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/21/%E5%9B%9B%E5%85%83%E6%95%B0/image-20200321072258479.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/21/%E5%9B%9B%E5%85%83%E6%95%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>四元数学习 | 一只想要飞的很高很高的笨鸟</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+       <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一只想要飞的很高很高的笨鸟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/21/%E5%9B%9B%E5%85%83%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一只想要飞的很高很高的笨鸟">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          四元数学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-03-21 11:03:23 / Modified: 11:07:08" itemprop="dateCreated datePublished" datetime="2020-03-21T11:03:23+08:00">2020-03-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CFD%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
+                    <span itemprop="name">CFD相关</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>备注：本文主体内容为<a href="https://krasjet.github.io/quaternion/quaternion.pdf的归纳，如有侵权，请联系本人删除。" target="_blank" rel="noopener">https://krasjet.github.io/quaternion/quaternion.pdf的归纳，如有侵权，请联系本人删除。</a></p>
+<a id="more"></a>
+<h1 id="复数"><a href="#复数" class="headerlink" title="复数"></a>复数</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ol>
+<li>复数定义为：</li>
+</ol>
+<script type="math/tex; mode=display">
+z=a+bi\tag{1}</script><p>其中，a为实部，b为虚部。$i^2=-1$</p>
+<p>而z其实就是对于{1,i}这个<strong>基（Basis）的线性组合（Linear Combination）</strong><sup><a href="#fn_1" id="reffn_1">1</a></sup></p>
+<p>也可以用向量来表示：</p>
+<script type="math/tex; mode=display">
+z=\left[\begin{array}{c}a\\b\end{array} \right]\tag{2}</script><ol>
+<li>复数的<strong>运算法则</strong></li>
+</ol>
+<ul>
+<li>复数加减法：略</li>
+<li>复数乘法</li>
+</ul>
+<p>令$z_1=a_1+b_1i,\quad z_2=a_2+b_2i$，则</p>
+<script type="math/tex; mode=display">
+z_1z_2=a_1a_2-b_1b_2+(a_1b_2+a_2b_1)i\\=\left[ \begin{matrix}
+    a_1&-b_1        \\
+    b_1&a_1        \\
+\end{matrix} \right] \left[ \begin{array}{c}
+    a_2\\
+    b_2\\
+\end{array} \right] \tag{3}</script><p>左侧的$\left[ \begin{matrix}<br>    a_1&amp;-b_1        \\<br>    b_1&amp;a_1        \\<br>\end{matrix} \right] $是$z_1$的<strong>矩阵形式</strong>，在矩阵形式下，复数与复数的相乘可以表示为矩阵的相乘</p>
+<script type="math/tex; mode=display">
+z_1z_2=\left[ \begin{matrix}
+    a_1&-b_1        \\
+    b_1&a_1        \\
+\end{matrix} \right] \left[ \begin{matrix}
+    a_2&-b_2        \\
+    b_2&a_2        \\
+\end{matrix} \right]\\
+=\left[ \begin{matrix}
+    a_1a_2-b_1b_2&-(a_1b_2+a_2b_1)        \\
+    (a_1b_2+a_2b_1)&a_1a_2-b_1b_2        \\
+\end{matrix} \right]\tag{4}</script><ul>
+<li>复数结合律：$z_1z_2=z_2z_1$</li>
+<li>模和共轭：$z\bar z=a^2+b^2=||z||^2$</li>
+</ul>
+<h2 id="复数的二维旋转"><a href="#复数的二维旋转" class="headerlink" title="复数的二维旋转"></a>复数的二维旋转</h2><script type="math/tex; mode=display">
+\left[ \begin{array} { c c } a & - b \\ b & a \end{array} \right] = \sqrt { a ^ { 2 } + b ^ { 2 } } \left[ \begin{array} { c c } \frac { a } { \sqrt { a ^ { 2 } + b ^ { 2 } } } & \frac { - b } { \sqrt { a ^ { 2 } + b ^ { 2 } } } \\ \frac { b } { \sqrt { a ^ { 2 } + b ^ { 2 } } } & \frac { a } { \sqrt { a ^ { 2 } + b ^ { 2 } } } \end{array} \right]\tag{5}</script><script type="math/tex; mode=display">
+\begin{aligned} \left[ \begin{array} { c c } a & - b \\ b & a \end{array} \right] & = \sqrt { a ^ { 2 } + b ^ { 2 } } \left[ \begin{array} { c c } \cos ( \theta ) & - \sin ( \theta ) \\ \sin ( \theta ) & \cos ( \theta ) \end{array} \right] \\ & = \| z \| \left[ \begin{array} { c c } \cos ( \theta ) & - \sin ( \theta ) \\ \sin ( \theta ) & \cos ( \theta ) \end{array} \right] \\ & = \| z \| \cdot I \left[ \begin{array} { c c } \cos ( \theta ) & - \sin ( \theta ) \\ \sin ( \theta ) & \cos ( \theta ) \end{array} \right] \\ & = \left[ \begin{array} { c c } \| z \| & 0 \\ 0 & \| z \| \end{array} \right] \left[ \begin{array} { c c } \cos ( \theta ) & - \sin ( \theta ) \\ \sin ( \theta ) & \cos ( \theta ) \end{array} \right] \end{aligned}\tag{6}</script><ol>
+<li>复数的相乘其实是<strong>缩放与旋转的复合</strong>，如果有一个复数 $z = a + bi$， 那么 <em>z</em> 与任意一个复数 c 相乘都会将 c 逆时针旋转$\theta=atan2(b,a)$度，并将其缩放$||z||=\sqrt{a^2+b^2}$倍<sup><a href="#fn_1" id="reffn_1">1</a></sup></li>
+</ol>
+<blockquote>
+<p>atan2是对于atan的修正，更稳定，用于计算复数的方位角<sup><a href="#fn_2" id="reffn_2">2</a></sup></p>
+</blockquote>
+<script type="math/tex; mode=display">
+atan2 ( y , x ) = \left\{ \begin{array} { l l } \arctan \left( \frac { y } { x } \right) & x > 0 \\ \arctan \left( \frac { y } { x } \right) + \pi & y \geq 0 , x < 0 \\ \arctan \left( \frac { y } { x } \right) - \pi & y < 0 , x < 0 \\ + \frac { \pi } { 2 } & y < 0 , x = 0 , x = 0 \\ - \frac { \pi } { 2 } & y = 0 , x = 0 \end{array} \right.\tag{7}</script><ol>
+<li><strong>二维旋转公式</strong><sup><a href="#fn_1" id="reffn_1">1</a></sup></li>
+</ol>
+<ul>
+<li>矩阵型</li>
+</ul>
+<script type="math/tex; mode=display">
+v'=zv=\left[ \begin{matrix}
+    cos(\theta)&-sin(\theta)        \\
+    sin(\theta)&cos(\theta)    \\
+\end{matrix} \right]v\tag{8}</script><ul>
+<li>复数积型</li>
+</ul>
+<script type="math/tex; mode=display">
+v'=(cos(\theta)+isin(\theta))v\tag{9}</script><ul>
+<li>极坐标型</li>
+</ul>
+<script type="math/tex; mode=display">
+v'=e^{i\theta}v\tag{10}</script><h1 id="三维空间的旋转"><a href="#三维空间的旋转" class="headerlink" title="三维空间的旋转"></a>三维空间的旋转</h1><p>在实际代码的实现中，对于一个非单位长度的旋转轴向量 <strong><em>u</em></strong>，必须先转换为<strong>单位向量</strong></p>
+<script type="math/tex; mode=display">
+\hat u=\frac u{||u||}\tag{11}</script><h2 id="旋转的分解"><a href="#旋转的分解" class="headerlink" title="旋转的分解"></a>旋转的分解</h2><p><img src="image-20200321072258479.png" alt="image-20200321072258479"></p>
+<script type="math/tex; mode=display">
+v=v_{||}+v_{\bot }\tag{12}</script><p>其中，$v_{||}$是v在u上的正交投影，因此可得出</p>
+<script type="math/tex; mode=display">
+\begin{align}v_{||}&=proj_u(v)\\&=\frac{u\cdot v}{u\cdot u}u\\&=\frac{u\cdot v}{||u||^2}u\quad(||u||^2=u\cdot u)\\&=(u\cdot v)u\quad(||u||=1\end{align}\tag{13}</script><script type="math/tex; mode=display">
+v_{\bot}=v-v_{||}=v-(u\cdot v)u\tag{14}</script><ul>
+<li>对于<strong>平行分量</strong>，旋转后保持不变</li>
+<li>对于<strong>垂直分量</strong></li>
+</ul>
+<p><img src="image-20200321073316195.png" alt="image-20200321073316195"></p>
+<p>构建一个与u，$v_{\bot}$正交的向量w，根据叉乘时判断向量的方向<sup><a href="#fn_3" id="reffn_3">3</a></sup>：</p>
+<p>将向量a和b首尾相连</p>
+<ul>
+<li>如果$a\times b$呈顺时针方向，则$a\times b$远离你</li>
+<li>如果$a\times b$呈逆时针方向，则$a\times b$朝向你</li>
+</ul>
+<script type="math/tex; mode=display">
+w=u\times v_{\bot}\tag{15}</script><script type="math/tex; mode=display">
+\begin{align}||w||&=||u\times v_{\bot}||\\&=||u||\cdot||v_{\bot}||\cdot sin(\pi/2)\\&=||v_{\bot}||\end{align}\tag{16}</script><p>所以可求得<strong>旋转后的垂直分量</strong>$v_{\bot}’$为</p>
+<script type="math/tex; mode=display">
+\begin{align}v_{\bot}'&=v_{\bot}cos(\theta)+wsin(\theta)
+\\&=v_{\bot}cos(\theta)+(u\times v_{\bot})sin(\theta)\end{align}\tag{17}</script><p>又</p>
+<script type="math/tex; mode=display">
+\begin{align}u\times v_{\bot}&=u\times(v-v_{||})
+\\&=u\times v-u\times v_{||}\\&=u\times v\end{align}\tag{18}</script><p>综上所述，在三维空间中，矢量v沿矢量u旋转$\theta$角后所得的矢量$v’$为</p>
+<script type="math/tex; mode=display">
+\begin{align}v'&=(u\cdot v)u+v_{\bot}cos(\theta)+(u\times v_{\bot})sin(\theta)\\&=(u\cdot v)u+(v-(u\cdot v)u)cos(\theta)+(u\times v)sin(\theta)\\&=cos(\theta)v+(1-cos(\theta))(u\cdot v)u+sin(\theta)(u\times v)\end{align}\tag{19}</script><h1 id="四元数"><a href="#四元数" class="headerlink" title="四元数"></a>四元数</h1><ol>
+<li>定义：四元数有<strong>一个实部</strong>和<strong>三个虚部</strong>，可以写成如下形式</li>
+</ol>
+<script type="math/tex; mode=display">
+q=a+bi+cj+dk\quad(a,b,c,d\in R)\tag{20}</script><blockquote>
+<p>$i^2=j^2=k^2=ijk=-1$</p>
+</blockquote>
+<ol>
+<li>四元数其实就是对基<strong>{1,i,j,k}</strong>的线性组合，四元数也可以写成向量的形式</li>
+</ol>
+<script type="math/tex; mode=display">
+q=\left[ \begin{array}{c}
+    a\\
+    b\\
+    c\\
+    d\\
+\end{array} \right] 
+\\\tag{21}</script><ol>
+<li>此外，也经常将四元数的实部和虚部分开，并用一个三维的向量将它表示为标量和向量的有序对形式</li>
+</ol>
+<script type="math/tex; mode=display">
+q=[s,v]\quad (v=\left[ \begin{array}{c}
+    x\\
+    y\\
+    z\\
+\end{array} \right] ,s,x,y,z\in R)\tag{22}</script><h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><h3 id="模长（范数）"><a href="#模长（范数）" class="headerlink" title="模长（范数）"></a>模长（范数）</h3><script type="math/tex; mode=display">
+\begin{align}||q||&=\sqrt{a^2+b^2+c^2+d^2}\\&=\sqrt{s^2+||v||^2}\\&=\sqrt{s^2+v\cdot v}\end{align}\tag{23}</script><h3 id="四元数加减法"><a href="#四元数加减法" class="headerlink" title="四元数加减法"></a>四元数加减法</h3><script type="math/tex; mode=display">
+q_1\pm q_2=[s\pm t,\boldsymbol v\pm \boldsymbol u]\tag{24}</script><h3 id="标量乘法"><a href="#标量乘法" class="headerlink" title="标量乘法"></a>标量乘法</h3><p>四元数$q=a+bi+cj+dk$和一个标量s，他们的乘积为</p>
+<script type="math/tex; mode=display">
+sq=s(a+bi+cj+dk)=sa+sbi+scj+sdk\tag{25}</script><h3 id="四元数乘法"><a href="#四元数乘法" class="headerlink" title="四元数乘法"></a>四元数乘法</h3><ol>
+<li><strong>左乘和右乘</strong></li>
+</ol>
+<ul>
+<li>左乘：$q_1q_2$（$q_2$左乘以$q_1$）</li>
+<li>右乘：$q_2q_1$（$q_2$右乘以$q_1$）</li>
+</ul>
+<ol>
+<li>对于四元数$q_1=a+bi+cj+dk$和$q_2=e+fi+gj+hk$</li>
+</ol>
+<script type="math/tex; mode=display">
+\begin{aligned} q _ { 1 } q _ { 2 } = & ( a + b i + c j + d k ) ( e + f i + g j + h k ) \\ = & a e + a f i + a g j + a h k + \\ & b e i + b f i ^ { 2 } + b g i j + b h i k + \\ & c e j + c f j i + c g j ^ { 2 } + c h j k + \\ & d e k + d f k i + d g k j + d h k ^ { 2 } \end{aligned}\tag{26}</script><ol>
+<li><p><img src="image-20200321085015563.png" alt="image-20200321085015563"></p>
+</li>
+</ol>
+<blockquote>
+<p>$ij=k,ji=-k$</p>
+</blockquote>
+<p>通过上述表格，式(26可被化简为)</p>
+<script type="math/tex; mode=display">
+\begin{aligned}q_1q_2 = & ( a e - b f - c g - d h ) + \\ & ( b e + a f - d g + c h ) i \\ & ( c e + d f + a g - b h ) j \\ & ( d e - c f + b g + a h ) k \end{aligned}\tag{27}</script><h3 id="矩阵形式"><a href="#矩阵形式" class="headerlink" title="矩阵形式"></a>矩阵形式</h3><ol>
+<li>$q_2$<strong>左乘以</strong>$q_1$</li>
+</ol>
+<script type="math/tex; mode=display">
+q_1q_2=\left[ \begin{matrix}
+    a&        -b&        -c&        -d\\
+    b&        a&        -d&        c\\
+    c&        d&        a&        -b\\
+    d&        -c&        b&        a\\
+\end{matrix} \right] \left[ \begin{array}{c}
+    e\\
+    f\\
+    g\\
+    h\\
+\end{array} \right] \tag{28}</script><ol>
+<li>$q_2$<strong>右乘以</strong>$q_1$</li>
+</ol>
+<script type="math/tex; mode=display">
+q_2q_1=\left[ \begin{matrix}
+    a&        -b&        -c&        -d\\
+    b&        a&        d&        -c\\
+    c&        -d&        a&        b\\
+    d&        c&        -b&        a\\
+\end{matrix} \right] \left[ \begin{array}{c}
+    e\\
+    f\\
+    g\\
+    h\\
+\end{array} \right] \tag{29}</script><h3 id="Grasmann-积"><a href="#Grasmann-积" class="headerlink" title="Graßmann 积"></a>Graßmann 积</h3><p>令$v=\left[ \begin{array}{c}<br>    b\\<br>    c\\<br>    d\\<br>\end{array} \right] ,u=\left[ \begin{array}{c}<br>    f\\<br>    g\\<br>    h\\<br>\end{array} \right] $</p>
+<script type="math/tex; mode=display">
+q_1q_2=[ae-\boldsymbol v\cdot \boldsymbol u,a\boldsymbol u+e\boldsymbol v+\boldsymbol v\times \boldsymbol u]\tag{30}</script><p>对于$q_1=[s,\boldsymbol v], q_2=[t,\boldsymbol u]$</p>
+<script type="math/tex; mode=display">
+q_1q_2=[st-\boldsymbol v\cdot \boldsymbol u,s\boldsymbol u+t\boldsymbol v+\boldsymbol v\times \boldsymbol u]\tag{31}</script><p>这就是<strong>Graßmann积</strong></p>
+<h3 id="纯四元数"><a href="#纯四元数" class="headerlink" title="纯四元数"></a>纯四元数</h3><script type="math/tex; mode=display">
+v=[0,\boldsymbol v]\tag{32}</script><p>纯四元数<strong>特性</strong>：如果有两个纯四元数$v=[0,\boldsymbol v],u=[0,\boldsymbol u]$</p>
+<script type="math/tex; mode=display">
+\begin{aligned} v u & = [ 0 - \mathbf { v } \cdot \mathbf { u } , 0 + \mathbf { v } \times \mathbf { u } ] \\ & = [ - \mathbf { v } \cdot \mathbf { u } , \mathbf { v } \times \mathbf { u } ] \end{aligned}\tag{33}</script><h3 id="逆和共轭"><a href="#逆和共轭" class="headerlink" title="逆和共轭"></a>逆和共轭</h3><ol>
+<li>通常将乘法的<strong>逆运算</strong>定义为$pq^{-1}$或者$q^{-1}p$</li>
+</ol>
+<script type="math/tex; mode=display">
+qq^{-1}=q^{-1}q=1\quad(q\ne 0)\tag{34}</script><ol>
+<li>定义一个四元数$q=a+bi+ck+dj$的<strong>共轭</strong>为$q^*=a-bi-ck-dj$，共轭四元数的一个特别的性质为：</li>
+</ol>
+<script type="math/tex; mode=display">
+\begin{aligned} q q ^ { * } & = [ s , \mathbf { v } ] \cdot [ s , - \mathbf { v } ] \\ & = \left[ s ^ { 2 } - \mathbf { v } \cdot ( - \mathbf { v } ) , s ( - \mathbf { v } ) + s \mathbf { v } + \mathbf { v } \times ( - \mathbf { v } ) \right] \\ & = \left[ s ^ { 2 } + \mathbf { v } \cdot \mathbf { v } , \mathbf { 0 } \right]\\&=||q||^2 \\&=q^*q\end{aligned}\tag{35}</script><p>所以可得到<strong>四元数的逆</strong></p>
+<script type="math/tex; mode=display">
+q^{-1}=\frac{q^*}{||q||^2}\tag{36}</script><ol>
+<li><strong>单位四元数</strong></li>
+</ol>
+<script type="math/tex; mode=display">
+q^{-1}=\frac{q^*}{1^2}=q^*\tag{37}</script><h2 id="四元数和三维旋转"><a href="#四元数和三维旋转" class="headerlink" title="四元数和三维旋转"></a>四元数和三维旋转</h2><p>参考<strong>三维空间的旋转</strong>章节，将下列向量定义为纯四元数</p>
+<blockquote>
+<p>之后的纯四元数均不加粗</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\begin{aligned} v & = [ 0 , \mathbf { v } ] & v ^ { \prime } & = \left[ 0 , \mathbf { v } ^ { \prime } \right] \\ v _ { \perp } & = \left[ 0 , \mathbf { v } _ { \perp } \right] & v _ { \perp } ^ { \prime } & = \left[ 0 , \mathbf { v } _ { \perp } ^ { \prime } \right] \\ v _ { \| } & = \left[ 0 , \mathbf { v } _ { \| } \right] & & v _ { \| } ^ { \prime } & = \left[ 0 , \mathbf { v } _ { \| } ^ { \prime } \right] \\ u & = [ 0 , \mathbf { u } ] & & \end{aligned}\tag{38}</script><h3 id="v-bot-的旋转"><a href="#v-bot-的旋转" class="headerlink" title="$v_{\bot}$的旋转"></a>$v_{\bot}$的旋转</h3><p>根据（17）</p>
+<script type="math/tex; mode=display">
+\begin{align}v_{\bot}'&=v_{\bot}cos(\theta)+wsin(\theta)
+\\&=v_{\bot}cos(\theta)+(u\times v_{\bot})sin(\theta)\end{align}\tag{17}</script><p>利用纯四元数的性质，可得到</p>
+<script type="math/tex; mode=display">
+\begin{align}uv_{\bot}&=[0,\mathbf u\times \mathbf v_{\bot}]\\&=\mathbf u\times \mathbf v_{\bot}\end{align}\tag{39}</script><p>代入，得</p>
+<script type="math/tex; mode=display">
+v'_{\bot}=cos(\theta)v_{\bot}+sin(\theta)(uv_{\bot})
+=(cos(\theta)+sin(\theta)u)v_{\bot}\tag{40}</script><p>令$q=cos(\theta)+sin(\theta)u$，此时可得到</p>
+<script type="math/tex; mode=display">
+v_{\bot}'=qv_{\bot}\tag{41}</script><p>对q继续变形</p>
+<script type="math/tex; mode=display">
+\begin{aligned} q & = \cos ( \theta ) + \sin ( \theta ) u \\ & = [ \cos ( \theta ) , 0 ] + [ 0 , \sin ( \theta ) \mathbf { u } \\ & = [ \cos ( \theta ) , \sin ( \theta ) \mathbf { u } ] \end{aligned}\tag{42}</script><p>如果旋转轴<strong>u</strong>的坐标为$\left[ \begin{array}{c}<br>    u_x\\<br>    u_y\\<br>    u_z\\<br>\end{array} \right] $，旋转角为$\theta$，那么</p>
+<script type="math/tex; mode=display">
+q=cos(\theta)+sin(\theta)u_xi+sin(\theta)u_yj+sin(\theta)u_zk\tag{43}</script><blockquote>
+<p>q为单位四元数$||q||=1$</p>
+</blockquote>
+<h3 id="v-的旋转"><a href="#v-的旋转" class="headerlink" title="$v_{||}$的旋转"></a>$v_{||}$的旋转</h3><script type="math/tex; mode=display">
+v_{||}'=v_{||}\tag{44}</script><h3 id="v-的旋转-1"><a href="#v-的旋转-1" class="headerlink" title="$v$的旋转"></a>$v$的旋转</h3><script type="math/tex; mode=display">
+v'=v_{||}+qv_{\bot}\tag{45}</script><p>==<strong>引理1</strong>：如果$q=[cos(\theta),sin(\theta)\mathbf u]$，而且<strong>u</strong>为单位向量，那么$q^2=qq=[cos(2\theta),sin(2\theta)\mathbf u]$==</p>
+<p>对（45）进行变形得</p>
+<script type="math/tex; mode=display">
+\begin{align}v'&=v_{||}+q    v_{\bot}\\&=1\cdot v_{||}+qv_{\bot}\\&=pp^{-1}v_{||}+ppv_{\bot}\\&=pp^{*}v_{||}+ppv_{\bot}\end{align}\tag{46}</script><blockquote>
+<p>令$q=p^2$，则$p=[cos(\frac 12\theta),sin(\frac 12\theta)\mathbf u]$</p>
+</blockquote>
+<p>==<strong>引理2</strong>：假设$v_{||}=[0,\mathbf v_{||}]$是一个纯四元数，而$q=[\alpha,\beta \mathbf u]$，其中$\mathbf u$是一个单位向量，$\alpha,\beta \in R$，在这种条件下，如果$\mathbf v_{||}$平行于$\mathbf u$，那么$qv_{||}=v_{||}q$==</p>
+<p>==<strong>引理3</strong>：假设$v_\bot=[0,\mathbf v_\bot]$是一个纯四元数，而$q=[\alpha,\beta\mathbf u]$，其中$\mathbf u$是一个单位向量，$\alpha,\beta\in R$。在这种条件下，如果$\mathbf v_\bot$正交于<strong>u</strong>，那么$qv_{\bot}=v_\bot q^*$==</p>
+<p>所以，对公式（46）做最后的变形得</p>
+<script type="math/tex; mode=display">
+\begin{aligned} v ^ { \prime } & = p p ^ { * } v _ { \| } + p p v _ { \perp } \\ & = p v _ { \| } p ^ { * } + p v _ { \perp } p ^ { * } \\ & = p \left( v _ { \| } + v _ { \perp } \right) p ^ { * }\\&=pvp^* \end{aligned}\tag{47}</script><blockquote>
+<p>其中$p=[cos(\frac 12\theta),sin(\frac 12\theta)\mathbf u]$，<strong>u</strong>为单位旋转轴</p>
+</blockquote>
+<h2 id="三维旋转的矩阵形式"><a href="#三维旋转的矩阵形式" class="headerlink" title="三维旋转的矩阵形式"></a>三维旋转的矩阵形式</h2><p>对于$p$，假设$a=cos(\frac 12\theta),b=sin(\frac 12\theta)u_x,c=sin(\frac 12\theta )u_y,d=sin(\frac 12\theta)u_z,q=a+bi+cj+dk$，利用<strong>左乘</strong>和<strong>右乘</strong>公式可得到</p>
+<script type="math/tex; mode=display">
+\begin{align}\mathbf v'=pvp^*&=L(q)R(q^*)\mathbf v\\&=\left[ \begin{matrix}
+    a&        -b&        -c&        -d\\
+    b&        a&        -d&        c\\
+    c&        d&        a&        -b\\
+    d&        -c&        b&        a\\
+\end{matrix} \right]\left[ \begin{matrix}
+    a&        b&        c&        d\\
+    -b&        a&        -d&        c\\
+    -c&        d&        a&        -b\\
+    -d&        -c&        b&        a\\
+\end{matrix} \right]\mathbf v\\&=\left[ \begin{array} { c c c } 1 - 2 c ^ { 2 } - 2 d ^ { 2 } & 2 b c - 2 a d & 2 a c + 2 b d \\ 2 b c + 2 a d & 1 - 2 b ^ { 2 } - 2 d ^ { 2 } & 2 c d - 2 a b \\ 2 b d - 2 a c & 2 a b + 2 c d & 1 - 2 b ^ { 2 } - 2 c ^ { 2 } \end{array} \right] \mathbf { v }\end{align}\tag{48}</script><h2 id="旋转的复合"><a href="#旋转的复合" class="headerlink" title="旋转的复合"></a>旋转的复合</h2><p>==<strong>引理4</strong>对任意四元数$q_1=[s,\mathbf v],q_2=[t,\mathbf u]$: $q_1^<em>q_2^</em>=(q_2q_1)^*$==</p>
+<script type="math/tex; mode=display">
+v''=(q_2q_1)v(q_2q_1)^*\tag{49}</script><p>注意：先进行$q_1$的转换，之后进行$q_2$的转换，且是沿着一个全新的旋转轴进行的<strong>等价旋转</strong>，仅仅只有旋转的结果相同</p>
+<h2 id="双倍覆盖"><a href="#双倍覆盖" class="headerlink" title="双倍覆盖"></a>双倍覆盖</h2><p>同一个三维旋转可以使用两个不同的四元数：</p>
+<ul>
+<li>q代表沿着旋转轴<strong>u</strong>旋转$\theta$度</li>
+<li>-q代表沿着相反的旋转轴$-\mathbf u$旋转$(2\pi-\theta)$度</li>
+</ul>
+<h2 id="指数形式"><a href="#指数形式" class="headerlink" title="指数形式"></a>指数形式</h2><script type="math/tex; mode=display">
+v'=e^{u\frac\theta2}ve^{-u\frac \theta2}\tag{50}</script><ul>
+<li><strong>log</strong>运算</li>
+</ul>
+<script type="math/tex; mode=display">
+log(q)=log(e^{u\theta})=[0,\mathbf u\theta]\tag{51}</script><ul>
+<li><strong>幂</strong>运算</li>
+</ul>
+<script type="math/tex; mode=display">
+q^t=(e^{u\theta})^t=e^{ut\theta}=[cos(t\theta),sin(t\theta)\mathbf u]\tag{52}</script><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/05/scalarTransportFoam/" rel="prev" title="scalarTransportFoam">
+      <i class="fa fa-chevron-left"></i> scalarTransportFoam
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#复数"><span class="nav-number">1.</span> <span class="nav-text">复数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复数的二维旋转"><span class="nav-number">1.2.</span> <span class="nav-text">复数的二维旋转</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三维空间的旋转"><span class="nav-number">2.</span> <span class="nav-text">三维空间的旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#旋转的分解"><span class="nav-number">2.1.</span> <span class="nav-text">旋转的分解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四元数"><span class="nav-number">3.</span> <span class="nav-text">四元数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#性质"><span class="nav-number">3.1.</span> <span class="nav-text">性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模长（范数）"><span class="nav-number">3.1.1.</span> <span class="nav-text">模长（范数）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四元数加减法"><span class="nav-number">3.1.2.</span> <span class="nav-text">四元数加减法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标量乘法"><span class="nav-number">3.1.3.</span> <span class="nav-text">标量乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四元数乘法"><span class="nav-number">3.1.4.</span> <span class="nav-text">四元数乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵形式"><span class="nav-number">3.1.5.</span> <span class="nav-text">矩阵形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Grasmann-积"><span class="nav-number">3.1.6.</span> <span class="nav-text">Graßmann 积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#纯四元数"><span class="nav-number">3.1.7.</span> <span class="nav-text">纯四元数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逆和共轭"><span class="nav-number">3.1.8.</span> <span class="nav-text">逆和共轭</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四元数和三维旋转"><span class="nav-number">3.2.</span> <span class="nav-text">四元数和三维旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#v-bot-的旋转"><span class="nav-number">3.2.1.</span> <span class="nav-text">$v_{\bot}$的旋转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-的旋转"><span class="nav-number">3.2.2.</span> <span class="nav-text">$v_{||}$的旋转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-的旋转-1"><span class="nav-number">3.2.3.</span> <span class="nav-text">$v$的旋转</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三维旋转的矩阵形式"><span class="nav-number">3.3.</span> <span class="nav-text">三维旋转的矩阵形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#旋转的复合"><span class="nav-number">3.4.</span> <span class="nav-text">旋转的复合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双倍覆盖"><span class="nav-number">3.5.</span> <span class="nav-text">双倍覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指数形式"><span class="nav-number">3.6.</span> <span class="nav-text">指数形式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="true"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
