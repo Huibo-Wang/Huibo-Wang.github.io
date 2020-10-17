@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="搭建个人博客 此处参考下列卡夫卡想忘了你的知乎文章搭建，文章链接如下  [手把手教你怎么用 Hexo + GitHub Pages 搭建 Blog][https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;59517224]  hexo常见指令">
+  <meta name="description" content="SIMPLE 算法概述 $$ { c } \frac { ( \rho \mathbf { v } ) ^ { n + 1 } - ( \rho \mathbf { v } ) ^ { n } } { \Delta t } + C \left( \mathbf { v } ^ { n + 1 } \right) &#x3D; L \left( \mathbf { v } ^ { n + 1 } \right">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo+github创建基本教程">
-<meta property="og:url" content="http://yoursite.com/2020/02/21/hexo+github%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:title" content="SIMPLE，SIMPLEC和PISO算法">
+<meta property="og:url" content="http://yoursite.com/2020/03/26/SIMPLE_PISO_PIMPLE/index.html">
 <meta property="og:site_name" content="一只想要飞的很高很高的笨鸟">
-<meta property="og:description" content="搭建个人博客 此处参考下列卡夫卡想忘了你的知乎文章搭建，文章链接如下  [手把手教你怎么用 Hexo + GitHub Pages 搭建 Blog][https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;59517224]  hexo常见指令">
+<meta property="og:description" content="SIMPLE 算法概述 $$ { c } \frac { ( \rho \mathbf { v } ) ^ { n + 1 } - ( \rho \mathbf { v } ) ^ { n } } { \Delta t } + C \left( \mathbf { v } ^ { n + 1 } \right) &#x3D; L \left( \mathbf { v } ^ { n + 1 } \right">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-02-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-02-23T07:57:03.195Z">
+<meta property="article:published_time" content="2020-03-26T03:43:00.078Z">
+<meta property="article:modified_time" content="2020-06-11T02:50:21.899Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/02/21/hexo+github%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/">
+<link rel="canonical" href="http://yoursite.com/2020/03/26/SIMPLE_PISO_PIMPLE/">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>hexo+github创建基本教程 | 一只想要飞的很高很高的笨鸟</title>
+  <title>SIMPLE，SIMPLEC和PISO算法 | 一只想要飞的很高很高的笨鸟</title>
   
 
 
@@ -145,7 +145,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/21/hexo+github%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E6%95%99%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/SIMPLE_PISO_PIMPLE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -158,7 +158,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          hexo+github创建基本教程
+          SIMPLE，SIMPLEC和PISO算法
         </h1>
 
         <div class="post-meta">
@@ -168,14 +168,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-21 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-21T00:00:00+08:00">2020-02-21</time>
+              <time title="Created: 2020-03-26 11:43:00" itemprop="dateCreated datePublished" datetime="2020-03-26T11:43:00+08:00">2020-03-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-23 15:57:03" itemprop="dateModified" datetime="2020-02-23T15:57:03+08:00">2020-02-23</time>
+                <time title="Modified: 2020-06-11 10:50:21" itemprop="dateModified" datetime="2020-06-11T10:50:21+08:00">2020-06-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -183,8 +183,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/blog/" itemprop="url" rel="index">
-                    <span itemprop="name">blog</span>
+                  <a href="/categories/CFD%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
+                    <span itemprop="name">CFD相关</span>
                   </a>
                 </span>
             </span>
@@ -200,49 +200,129 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1>搭建个人博客</h1>
-<p>此处参考下列<strong>卡夫卡想忘了你</strong>的知乎文章搭建，文章链接如下</p>
+        <h1>SIMPLE</h1>
+<h2 id="算法概述">算法概述</h2>
+<p>$$<br>
+{ c } \frac { ( \rho \mathbf { v } ) ^ { n + 1 } - ( \rho \mathbf { v } ) ^ { n } } { \Delta t } + C \left( \mathbf { v } ^ { n + 1 } \right) = L \left( \mathbf { v } ^ { n + 1 } \right) - G \left( p ^ { n + 1 } \right) \tag{1}<br>
+$$</p>
+<p>$$<br>
+\frac { 3 ( \rho \mathbf { v } ) ^ { n + 1 } - 4 ( \rho \mathbf { v } ) ^ { n } + ( \rho \mathbf { v } ) ^ { n - 1 } } { 2 \Delta t } + C \left( \mathbf { v } ^ { n + 1 } \right) = L \left( \mathbf { v } ^ { n + 1 } \right) - G \left( p ^ { n + 1 } \right)\tag{2}<br>
+$$</p>
 <blockquote>
-<p>[手把手教你怎么用 Hexo + GitHub Pages 搭建 Blog][<a href="https://zhuanlan.zhihu.com/p/59517224" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/59517224</a>]</p>
+<p>第一个方程：隐式Euler方案；第二个方程：时间导数近似</p>
 </blockquote>
-<h1>hexo常见指令</h1>
 <a id="more"></a>
-<h2 id="init">init</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init [folder]    # 新建一个网站</span><br></pre></td></tr></table></figure>
-<h2 id="generate">generate</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate     # 生成网站静态文件，一般在写好文章和主题配置好后使用</span><br><span class="line"># 该命令可以简写成 hexo g</span><br></pre></td></tr></table></figure>
-<h2 id="server">server</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server   # 启动服务器</span><br></pre></td></tr></table></figure>
-<p>默认情况下，启动服务器后可以访问网址：<a href="https://link.zhihu.com/?target=http%3A//localhost%3A4000/">http://localhost:4000/</a> 查看网页效果。</p>
-<h2 id="deploy">deploy</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy   # 部署网站</span><br><span class="line"># 该命令可以简写成 hexo d</span><br></pre></td></tr></table></figure>
-<p>通过此命令将其上传到github上更新</p>
-<h2 id="clean"><strong>clean</strong></h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean    # 清楚缓存文件和已生成的静态文件</span><br></pre></td></tr></table></figure>
-<p>在更换主题、部署到 Github Pages 、Coding 上时需要使用 clean 来清除缓存。</p>
-<h2 id="version"><strong>version</strong></h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo version  # 查看 Hexo 版本</span><br></pre></td></tr></table></figure>
-<h1>更换主题</h1>
-<ul>
-<li>
-<p>在https://hexo.io/themes/上寻找适合的主题</p>
-</li>
-<li>
-<p>copy到blog下的themes目录</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;ppoffice&#x2F;hexo-theme-hueman.git themes&#x2F;hueman</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在根目录下的**_config.yml**文件中修改theme，默认是landscape，就是你第一次打开的主题。修改为：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: hueman</span><br></pre></td></tr></table></figure>
-<ul>
-<li>服务器更新</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>在一个时间步长的迭代中，非线性项和耦合项被更新，称为<strong>outer iteration</strong>，以区别于在固定系数的线性系统上执行的<strong>内部迭代</strong>。</p>
+<p>当迭代收敛时，可以得到$\mathbf v^{n+1}\approx \mathbf v^m$</p>
+<p>连续求解线性化动量方程，当所有隐性项被组合在一起时，对于每个速度分量，我们可以得到如下的矩阵方程<br>
+$$<br>
+A^{m-1}u_i^m=Q_i^{m-1}-G_i(p^m)\tag{3}<br>
+$$</p>
 <blockquote>
-<p>此时仍然没有上传到github，需要使用hexo deploy上传</p>
+<p>$G_i$是第i个分量的梯度；源项Q包含所有关于$u^{m - 1}_ i$可被显式求解的项，或这些项可能及任何体积力或其他线性化或延迟修正项，或在新的时间步依赖于$u^{n+1}_ i$以的其他变量（例如T）</p>
 </blockquote>
+<p>上面方程可被改为：<br>
+$$<br>
+A_Pu_{i,P}^m+\sum_kA_ku_{i,k}^m=Q_P-(\frac{\delta p^m}{\delta x_i})_P\tag{4}<br>
+$$</p>
+<blockquote>
+<p>压力项以符号差分形式表示，以强调解的方法与空间导数的离散化近似的独立性。<br>
+注意，<strong>系数</strong>$A_k$包含离散化<strong>对流</strong>和<strong>扩散项</strong>的贡献，而<strong>对角系数$A_P$<strong>包含</strong>非定常项</strong>的贡献</p>
+</blockquote>
+<p>分离（3）中的A为对角部分$A_D$和非对角线部分$A_{OD}$，在外迭代m中，使用上一个时间步求得的压力<br>
+$$<br>
+(A_D+A_{OD})u_i^<em>=Q-G_i(p^{m-1})\tag{5}<br>
+$$<br>
+通过求解（5）可求得速度场，但是不满足<strong>连续性方程</strong>，需进行<strong>速度</strong>，<strong>压力</strong>修正<br>
+$$<br>
+p^</em>=p^{m-1}+p’,\quad u^{<strong>}_i=u_i^{*}+u_i^{’}\tag{6}<br>
+$$<br>
+采用上式获得的速度压力修正，<strong>忽略相邻点的修正</strong>，可得到<br>
+$$<br>
+A_Du_i^{</strong>}+A_{OD}u_i^{<em>}=Q-G_i(p^</em>)\tag{7}<br>
+$$<br>
+（7）-（5），可得<br>
+$$<br>
+A_Du_i’=-G_i(p’)\Rightarrow u_i’=-(A_D)^{-1}G_i(p’)\tag{8}<br>
+$$</p>
+<blockquote>
+<ul>
+<li>
+<p>如果在将修正速度应用到非对角项，求解会非常的复杂</p>
+</li>
+<li>
+<p>上述简化会影响收敛速率，因此需要<strong>under-relaxation factors</strong></p>
+</li>
+</ul>
+</blockquote>
+<p>当前，我们需要修正速度$u_i^{**}$满足离散的连续性方程，因此可得到<br>
+$$<br>
+D(\rho\mathbf v^*)+D(\rho\mathbf v’)=0\tag{9}<br>
+$$</p>
+<blockquote>
+<p>D代表导数，不可压缩流体中$D(\rho v^m)=0$</p>
+</blockquote>
+<p>将（8）代入（9），我们可以得到<br>
+$$<br>
+D(\rho(A_D)^{-1}G_i(p’))=D(\rho\mathbf v^*)\tag{10}<br>
+$$<br>
+上述方法通常称为<strong>投影法</strong>：首先构造一个不满足连续性方程的速度场，然后通过减去一些东西(通常是一个压力梯度)来修正它。</p>
+<p>从向量数学的角度看，压力作为一个算子通过<strong>连续性约束</strong>将散度速度向量场投射到非发散向量场中</p>
+<p>一旦<strong>压力修正</strong>被求解，速度和压力可通过（8）和（6）更新</p>
+<p>上式即为<code>**SIMPLE（Semi-Implicit Method for Pressure-Linked Equations）**</code>算法</p>
+<h2 id="计算步骤">计算步骤</h2>
+<ol>
+<li>通过上一时间步<strong>m-1</strong>的速度和压力求解矩阵方程，解得矩阵系数$A_D,A_{OD}$和源项$Q^{m-1}$</li>
+<li>通过式（5）计算得到预测速度$u_i^*$</li>
+<li>将得到的预测速度代入<strong>泊松方程</strong>（10）中计算得到压力修正项$p’$</li>
+<li>代入（8）式中得到速度修正项$u’_i$</li>
+<li>将求得的速度压力修正项代入到式（6）中求得下一时间步m的速度和压力$u_i^m, p^m$</li>
+<li>重复步骤1-5，开始迭代</li>
+</ol>
+<h1>SIMPLEC(SIMPLE_Corrected)</h1>
+<p>并没有忽略对于<strong>非对角项</strong>的<strong>速度修正</strong>，而是采用<strong>加权平均临近点值</strong>的方法近似速度修正<br>
+$$<br>
+u_{i,P}’\approx\frac{\sum_kA_ku_{i,k}’}{\sum_kA_k}\rightarrow \sum_kA_ku_{i,k}’\approx u_{i,P}’\sum_kA_k\tag{11}<br>
+$$<br>
+（4）减去（5）得<br>
+$$<br>
+A_Du_i’+A_{OD}u_i’=-G_i(p’)\tag{12}<br>
+$$<br>
+将（11）代入（12）中，可以得到<br>
+$$<br>
+u_i’=-(A_D+\widetilde{A_{OD}})^{-1}G_i(p’)\tag{13}<br>
+$$</p>
+<blockquote>
+<p>$\widetilde A_D$代表对角线元素的和</p>
+</blockquote>
+<p>ps：</p>
+<ol>
+<li>对于有限容积理论，当仅存在对流项和扩散项时，存在关系式$(A_D+\widetilde{A_{OD}})=0$，然而，当存在<strong>非稳态项</strong>时，或当除以<strong>松弛因子</strong>时，都会对$A_D$产生影响，而$A_D$（通常为正）远大于$\widetilde A_{OD}$（通常为负）的绝对值</li>
+<li>对于SIMPLEC算法，$(A_D+\widetilde{A_{OD}})$通常远小于SIMPLE算法中$A_D$的值（因为在SIMPLE算法中，压力梯度项要除以$A_D$的值，所以要避免大数除以小数。这也是SIMPLE算法中在压力修正时需要<strong>松弛因子</strong>的原因。</li>
+</ol>
+<p>计算<strong>压力修正项</strong><br>
+$$<br>
+D(\rho(A_D+\widetilde{A_{OD}})^{-1}G_i(p’))=D(\rho\mathbf v^*)\tag{14}<br>
+$$</p>
+<h1>PISO</h1>
+<p>介绍：将SIMPLE算法的步骤设定为<strong>预测</strong>步骤，同时加入一系列的<strong>修正</strong>步骤</p>
+<p>在SIMPLE后的第一次修正，要求修正后的速度和压力满足<strong>连续性方程</strong><br>
+$$<br>
+A_Du_i^{<em><strong>}+A_{OD}u_i^{</strong>}=Q-G_i(p^{</em><em>})\tag{15}<br>
+$$<br>
+（15）减去（7），得到<br>
+$$<br>
+A_Du_i’’+A_{OD}u_i’=-G_i(p’)\Rightarrow u_i’’=-(A_D)^{-1}(A_{OD}u_i’+G_i(p’’))\tag{16}<br>
+$$<br>
+$u_i^{</em><strong>}$满足连续性方程<br>
+$$<br>
+D(\rho\mathbf v^{</strong>})+D(\rho\mathbf v’’)=0\tag{17}<br>
+$$<br>
+将（16）代入（17），同时由于$D(\rho\mathbf v^{<strong>})=0$，可得到第二个</strong>压力-修正方程**<br>
+$$<br>
+D(\rho(A_D)^{-1}G_i(p’’))=D(\rho(A_D)^{-1}A_{OD}u_i’)\tag{18}<br>
+$$<br>
+通过以上步骤重复，多次进行压力修正，即为<strong>PISO算法（Pressure Implicit with Splitting of Operators）</strong></p>
 
     </div>
 
@@ -258,12 +338,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/21/next%E9%85%8D%E7%BD%AE/" rel="prev" title="next配置">
-      <i class="fa fa-chevron-left"></i> next配置
+    <a href="/2020/03/21/%E5%9B%9B%E5%85%83%E6%95%B0/" rel="prev" title="四元数学习">
+      <i class="fa fa-chevron-left"></i> 四元数学习
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/02/21/C++%20%E4%B8%AD%E7%9A%84%20mutable%20%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/" rel="next" title="C++ 中的 mutable 关键字（转载）">
-      C++ 中的 mutable 关键字（转载） <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/30/icoFoam/" rel="next" title="icoFoam">
+      icoFoam <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -324,7 +404,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">搭建个人博客</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">hexo常见指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#init"><span class="nav-number">2.1.</span> <span class="nav-text">init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generate"><span class="nav-number">2.2.</span> <span class="nav-text">generate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#server"><span class="nav-number">2.3.</span> <span class="nav-text">server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deploy"><span class="nav-number">2.4.</span> <span class="nav-text">deploy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clean"><span class="nav-number">2.5.</span> <span class="nav-text">clean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#version"><span class="nav-number">2.6.</span> <span class="nav-text">version</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">更换主题</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">SIMPLE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法概述"><span class="nav-number">1.1.</span> <span class="nav-text">算法概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算步骤"><span class="nav-number">1.2.</span> <span class="nav-text">计算步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">SIMPLEC(SIMPLE_Corrected)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">PISO</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

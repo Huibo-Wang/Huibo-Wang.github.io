@@ -1,0 +1,84 @@
+*, html {
+    margin:0;
+    padding:0;
+}
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+
+}
+title{
+    text-align: center;
+}
+#container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: url('../image/back.jpg') no-repeat;
+    background-size: cover;
+    /*z-index:-10;*/
+    /*background: url('../image/back.png') no-repeat center 0;*/
+}
+/*#avatar{*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*width: 20%;*/
+    /*height: 30%;*/
+    /*position: relative;*/
+    /*top: 10.1%;*/
+    /*left: 3%;*/
+/*}*/
+#NetID{
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    /*position: relative;*/
+    top: 9.1%;
+    left: 33.1%;
+    color: rgb(254,254,254);
+    font-size: 39px;
+    font-family: "Microsoft YaHei UI", serif;
+}
+#classes{
+    margin: 0;
+    padding: 0;
+    width: 50%;
+    /*position: relative;*/
+    top: 11.5%;
+    left: 33.1%;
+    color: rgb(254,254,254);
+    font-size: 39px;
+    font-family: "Microsoft YaHei UI", serif;
+}
+#date{
+    margin: 0;
+    padding: 0;
+    width: 70%;
+    position: fixed;
+    /*top: 30%;*/
+    /*left: 5.1%;*/
+}
+#time_date{
+    margin: 0;
+    padding: 0;
+    color: rgb(48,52,58);
+    font-size: 61px;
+    font-family: "Microsoft YaHei UI", serif;
+    font-weight: bold;
+}
+#time_second{
+    margin: 3.2%;
+    padding: 0;
+    /*width: 100%;*/
+    /*position: relative;*/
+    /*top: 30.5%;*/
+    /*left: 5%;*/
+    color: rgb(48,52,58);
+    font-size: 78px;
+    font-family: "Microsoft YaHei UI", serif;
+    font-weight: bold;
+}

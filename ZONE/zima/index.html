@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>交大校园码</title>
+    <link rel="stylesheet" type="text/css" href="src/css/index.css">
+</head>
+<script>
+    function getTime() {
+        var now =new Date();
+        var month = now.getMonth() + 1;
+        var day = now.getDate();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
+        // string =  year + "-" + 月 + "-" + 日 + " " + hour + ":" + minute + ":" + second;
+        var timeDate = document.getElementById("time_date");
+        if (month < 10)
+            month = '0' + month;
+        if (day < 10)
+            day = '0' + day;
+        timeDate.innerText = month + "月" + day + "日  ";
+        var timeSecond = document.getElementById("time_second");
+        if (hour < 10)
+            hour = '0' + hour;
+        if (minute < 10)
+            minute = '0' + minute;
+        if (second < 10)
+            second = '0' + second;
+        timeSecond.innerText = hour + ":" + minute + ":" + second;
+
+    }
+    window.setInterval("getTime()",1000)
+</script>
+<body>
+<div id="container">
+    <!--<div id="avatar">-->
+        <!--<img src="src/image/avatar_.jpg">-->
+    <!--</div>-->
+    <!--<div id="NetID">-->
+        <!--3118311045&nbsp;余涛&nbsp;&nbsp;&nbsp;研究生-->
+    <!--</div>-->
+    <!--<div id="classes">-->
+        <!--电子与信息学部/孙艺璇班-->
+    <!--</div>-->
+    <div id="date">
+        <span id="time_date"></span>
+        <span id="time_second"></span>
+    </div>
+
+</div>
+</body>
+<script>
+    window.onload = function () {
+        width = document.body.clientWidth;
+        height = document.documentElement.clientHeight;
+
+        // var netid = document.getElementById("NetID").style;
+        // netid.left = 0.331 * width  + 'px';
+        // netid.top= 0.18 * height  + 'px';
+        //
+        // var classes = document.getElementById("classes").style;
+        // classes.left = 0.331 * width  + 'px';
+        // classes.top= 0.2 * height  + 'px';
+
+        var date = document.getElementById("date").style;
+        date.left = 0.06 * width + 'px';
+        // 0.36
+        date.top= height * 0.28 + 'px';
+    };
+
+
+</script>
+</html>

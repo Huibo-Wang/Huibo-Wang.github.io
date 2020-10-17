@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="配置公式教程如下（很详细）: [here][https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;68e6f82d88b7]  最后一步，在调用mathjax时，如果我直接在文章开头添加：mathjax: true时，无法正确生成公式 修改方法：  123---mathjax: true---  圈住的部分，称为文章的front-matter">
+  <meta name="description" content="配置公式 教程如下（很详细）: [here][https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;68e6f82d88b7]  最后一步，在调用mathjax时，如果我直接在文章开头添加：mathjax: true时，无法正确生成公式 修改方法：  123---mathjax: true---  圈住的部分，称为文章的front-matter">
 <meta property="og:type" content="article">
 <meta property="og:title" content="next配置">
 <meta property="og:url" content="http://yoursite.com/2020/02/21/next%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="一只想要飞的很高很高的笨鸟">
-<meta property="og:description" content="配置公式教程如下（很详细）: [here][https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;68e6f82d88b7]  最后一步，在调用mathjax时，如果我直接在文章开头添加：mathjax: true时，无法正确生成公式 修改方法：  123---mathjax: true---  圈住的部分，称为文章的front-matter">
+<meta property="og:description" content="配置公式 教程如下（很详细）: [here][https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;68e6f82d88b7]  最后一步，在调用mathjax时，如果我直接在文章开头添加：mathjax: true时，无法正确生成公式 修改方法：  123---mathjax: true---  圈住的部分，称为文章的front-matter">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-20T16:00:00.000Z">
 <meta property="article:modified_time" content="2020-03-05T10:49:40.743Z">
@@ -200,7 +200,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="配置公式"><a href="#配置公式" class="headerlink" title="配置公式"></a>配置公式</h1><p>教程如下（很详细）:</p>
+        <h1>配置公式</h1>
+<p>教程如下（很详细）:</p>
 <p>[here][<a href="https://www.jianshu.com/p/68e6f82d88b7" target="_blank" rel="noopener">https://www.jianshu.com/p/68e6f82d88b7</a>]</p>
 <blockquote>
 <p>最后一步，在调用mathjax时，如果我直接在文章开头添加：mathjax: true时，无法正确生成公式</p>
@@ -208,53 +209,70 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>圈住的部分，称为文章的<strong>front-matter</strong><br><a id="more"></a></p>
+<p>圈住的部分，称为文章的<strong>front-matter</strong></p>
 </blockquote>
-<h1 id="首页显示文章摘要"><a href="#首页显示文章摘要" class="headerlink" title="首页显示文章摘要"></a>首页显示文章摘要</h1><p><strong>转载自</strong>：<br>[hexo技巧][<a href="https://ryderchan.github.io/2017/01/26/hexo小技巧-首页显示文章摘要及图片/" target="_blank" rel="noopener">https://ryderchan.github.io/2017/01/26/hexo小技巧-首页显示文章摘要及图片/</a>)]</p>
-<h2 id="next主题官方给的三种生成摘要方式"><a href="#next主题官方给的三种生成摘要方式" class="headerlink" title="next主题官方给的三种生成摘要方式"></a>next主题官方给的三种生成摘要方式</h2><ol>
-<li>在文章中使用<!--more-->手动进行截断，Hexo 提供的方式<strong>(推荐)</strong></li>
+<a id="more"></a>
+<h1>首页显示文章摘要</h1>
+<p><strong>转载自</strong>：<br>
+[hexo技巧][<a href="https://ryderchan.github.io/2017/01/26/hexo%E5%B0%8F%E6%8A%80%E5%B7%A7-%E9%A6%96%E9%A1%B5%E6%98%BE%E7%A4%BA%E6%96%87%E7%AB%A0%E6%91%98%E8%A6%81%E5%8F%8A%E5%9B%BE%E7%89%87/" target="_blank" rel="noopener">https://ryderchan.github.io/2017/01/26/hexo小技巧-首页显示文章摘要及图片/</a>)]</p>
+<h2 id="next主题官方给的三种生成摘要方式">next主题官方给的三种生成摘要方式</h2>
+<ol>
+<li>在文章中使用<!--more-->手动进行截断，Hexo 提供的方式**(推荐)**</li>
 <li>在文章的 <a href="https://hexo.io/docs/front-matter.html" target="_blank" rel="noopener">front-matter</a> 中添加 description，并提供文章摘录</li>
 <li>自动形成摘要，在主题配置文件中添加，默认截取的长度为 150字符，可以根据需要自行设定：</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auto_excerpt:</span><br><span class="line">  enable: true</span><br><span class="line">  length: 150</span><br></pre></td></tr></table></figure>
-<h2 id="文章模板"><a href="#文章模板" class="headerlink" title="文章模板"></a>文章模板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: git的基本使用</span><br><span class="line">date: 2017-01-24</span><br><span class="line">categories:</span><br><span class="line">- 学习</span><br><span class="line">- git</span><br><span class="line">tags:</span><br><span class="line">  - git</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">摘要内容......</span><br><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="添加文章分类"><a href="#添加文章分类" class="headerlink" title="添加文章分类"></a>添加文章分类</h1><p><strong>转载自</strong>：<br><a href="https://whx4j8.github.io/2016/03/16/hexo-next-添加为文章添加分类/" target="_blank" rel="noopener">hexo-next-为文章添加分类</a></p>
+<h2 id="文章模板">文章模板</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: git的基本使用</span><br><span class="line">date: 2017-01-24</span><br><span class="line">categories:</span><br><span class="line">- 学习</span><br><span class="line">- git</span><br><span class="line">tags:</span><br><span class="line">  - git</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">摘要内容......</span><br><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
+<h1>添加文章分类</h1>
+<p><strong>转载自</strong>：<br>
+<a href="https://whx4j8.github.io/2016/03/16/hexo-next-%E6%B7%BB%E5%8A%A0%E4%B8%BA%E6%96%87%E7%AB%A0%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB/" target="_blank" rel="noopener">hexo-next-为文章添加分类</a></p>
 <ol>
-<li><p>新建一个页面，命名为 categories 。命令如下：</p>
+<li>
+<p>新建一个页面，命名为 categories 。命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <blockquote>
 <p>此时在source文件夹下会产生categories文件夹，打开其中的index.md文件夹</p>
 </blockquote>
-<ol>
-<li><p>编辑刚新建的页面，将页面的类型设置为 categories ，主题将自动为这个页面显示所有分类。</p>
+<ol start="2">
+<li>
+<p>编辑刚新建的页面，将页面的类型设置为 categories ，主题将自动为这个页面显示所有分类。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">date: 2014-12-22 12:39:04</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 <p>注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">date: 2014-12-22 12:39:04</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>在菜单中添加链接。编辑主题的 _config.yml ，将 menu 中的 categories: /categories 注释去掉，如下:</p>
+<li>
+<p>在菜单中添加链接。编辑主题的 _config.yml ，将 menu 中的 categories: /categories 注释去掉，如下:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: &#x2F;</span><br><span class="line">  categories: &#x2F;categories</span><br><span class="line">  archives: &#x2F;archives</span><br><span class="line">  tags: &#x2F;tags</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>此时页面不显示分类，需继续设置如下：</p>
+<li>
+<p>此时页面不显示分类，需继续设置如下：</p>
 </li>
 </ol>
-<h2 id="添加文章分类关联"><a href="#添加文章分类关联" class="headerlink" title="添加文章分类关联"></a>添加文章分类关联</h2><p>在文章中添加categories属性，再部署之后就可以在分类页看到分类了</p>
+<h2 id="添加文章分类关联">添加文章分类关联</h2>
+<p>在文章中添加categories属性，再部署之后就可以在分类页看到分类了</p>
    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: hexo next 为文章添加分类</span><br><span class="line">date: 2016-03-16 08:12:43</span><br><span class="line">tags:</span><br><span class="line">categories: 前端	&#x2F;&#x2F;此处</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<h1 id="修改链接内文本样式"><a href="#修改链接内文本样式" class="headerlink" title="修改链接内文本样式"></a>修改链接内文本样式</h1><blockquote>
+<h1>修改链接内文本样式</h1>
+<blockquote>
 <p>[hexo引用文章链接][<a href="https://www.jianshu.com/p/9f0e90cc32c2" target="_blank" rel="noopener">https://www.jianshu.com/p/9f0e90cc32c2</a>]</p>
 </blockquote>
 <ul>
 <li>修改<code>Blog/themes/next/source/css/_common/components/post/post.styl</code>，在末尾添加CSS样式：</li>
 </ul>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文章内链接文本样式</span></span><br><span class="line">.post-body p a&#123;</span><br><span class="line">  color: #0593d3; <span class="comment">//原始链接颜色</span></span><br><span class="line">  border-bottom: <span class="keyword">none</span>;</span><br><span class="line">  border-bottom: 1px solid #0593d3; <span class="comment">//底部分割线颜色</span></span><br><span class="line">  &amp;:hover &#123;</span><br><span class="line">    color: #fc6423; <span class="comment">//鼠标经过颜色</span></span><br><span class="line">    border-bottom: <span class="keyword">none</span>;</span><br><span class="line">    border-bottom: 1px solid #fc6423; <span class="comment">//底部分割线颜色</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="在文章中添加图片"><a href="#在文章中添加图片" class="headerlink" title="在文章中添加图片"></a>在文章中添加图片</h1><blockquote>
+<h1>在文章中添加图片</h1>
+<blockquote>
 <p>转载：<a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/" target="_blank" rel="noopener">https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/</a></p>
 </blockquote>
-<h2 id="本地引用"><a href="#本地引用" class="headerlink" title="本地引用"></a>本地引用</h2><h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><p>当Hexo项目中只用到少量图片时，可以将图片统一放在<code>source/images</code>文件夹中，通过markdown语法访问它们。</p>
+<h2 id="本地引用">本地引用</h2>
+<h3 id="绝对路径">绝对路径</h3>
+<p>当Hexo项目中只用到少量图片时，可以将图片统一放在<code>source/images</code>文件夹中，通过markdown语法访问它们。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source&#x2F;images&#x2F;image.jpg![](&#x2F;images&#x2F;image.jpg)</span><br></pre></td></tr></table></figure>
 <p>图片既可以在<strong>首页内容</strong>中访问到，也可以在<strong>文章正文</strong>中访问到。</p>
-<h3 id="相对路径（这个是最实用的）"><a href="#相对路径（这个是最实用的）" class="headerlink" title="相对路径（这个是最实用的）"></a>相对路径（这个是最实用的）</h3><p>图片除了可以放在统一的<code>images</code>文件夹中，还可以放在文章自己的目录中。文章的目录可以通过配置<code>_config.yml</code>来生成。</p>
+<h3 id="相对路径（这个是最实用的）">相对路径（这个是最实用的）</h3>
+<p>图片除了可以放在统一的<code>images</code>文件夹中，还可以放在文章自己的目录中。文章的目录可以通过配置<code>_config.yml</code>来生成。</p>
 <blockquote>
 <p>主目录下的_config.yml</p>
 </blockquote>
@@ -264,7 +282,8 @@
 <p>上述是markdown的引用方式，图片只能在文章中显示，但无法在首页中正常显示。</p>
 <p>如果希望图片在文章和首页中<strong>同时显示</strong>，可以使用标签插件语法。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_posts&#x2F;post_name&#x2F;image.jpg&#123;% asset_img image.jpg This is an image %&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="CDN引用"><a href="#CDN引用" class="headerlink" title="CDN引用"></a>CDN引用</h2><p>除了在本地存储图片，还可以将图片上传到一些免费的CDN服务中。比如<a href="http://cloudinary.com/" target="_blank" rel="noopener">Cloudinary</a>提供的图片CDN服务，在Cloudinary中上传图片后，会生成对应的url地址，将地址直接拿来引用即可。</p>
+<h2 id="CDN引用">CDN引用</h2>
+<p>除了在本地存储图片，还可以将图片上传到一些免费的CDN服务中。比如<a href="http://cloudinary.com/" target="_blank" rel="noopener">Cloudinary</a>提供的图片CDN服务，在Cloudinary中上传图片后，会生成对应的url地址，将地址直接拿来引用即可。</p>
 
     </div>
 
@@ -346,7 +365,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置公式"><span class="nav-number">1.</span> <span class="nav-text">配置公式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#首页显示文章摘要"><span class="nav-number">2.</span> <span class="nav-text">首页显示文章摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#next主题官方给的三种生成摘要方式"><span class="nav-number">2.1.</span> <span class="nav-text">next主题官方给的三种生成摘要方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章模板"><span class="nav-number">2.2.</span> <span class="nav-text">文章模板</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加文章分类"><span class="nav-number">3.</span> <span class="nav-text">添加文章分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加文章分类关联"><span class="nav-number">3.1.</span> <span class="nav-text">添加文章分类关联</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改链接内文本样式"><span class="nav-number">4.</span> <span class="nav-text">修改链接内文本样式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在文章中添加图片"><span class="nav-number">5.</span> <span class="nav-text">在文章中添加图片</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地引用"><span class="nav-number">5.1.</span> <span class="nav-text">本地引用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#绝对路径"><span class="nav-number">5.1.1.</span> <span class="nav-text">绝对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相对路径（这个是最实用的）"><span class="nav-number">5.1.2.</span> <span class="nav-text">相对路径（这个是最实用的）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN引用"><span class="nav-number">5.2.</span> <span class="nav-text">CDN引用</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">配置公式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">首页显示文章摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#next主题官方给的三种生成摘要方式"><span class="nav-number">2.1.</span> <span class="nav-text">next主题官方给的三种生成摘要方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章模板"><span class="nav-number">2.2.</span> <span class="nav-text">文章模板</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">添加文章分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加文章分类关联"><span class="nav-number">3.1.</span> <span class="nav-text">添加文章分类关联</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">修改链接内文本样式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text">在文章中添加图片</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地引用"><span class="nav-number">5.1.</span> <span class="nav-text">本地引用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#绝对路径"><span class="nav-number">5.1.1.</span> <span class="nav-text">绝对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相对路径（这个是最实用的）"><span class="nav-number">5.1.2.</span> <span class="nav-text">相对路径（这个是最实用的）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN引用"><span class="nav-number">5.2.</span> <span class="nav-text">CDN引用</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -359,7 +378,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
